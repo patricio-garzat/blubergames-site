@@ -406,7 +406,7 @@
   function draw(i, hide = []) {
     const f = GP.frames[i];
     tilesG.innerHTML = f.tiles.filter((t) => !hide.includes(t.id)).map(poly).join("");
-    dotsG.innerHTML = hide.length || i === total ? "" : f.dots.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="0.035" fill="#FFFFFF" stroke="#1C2535" stroke-width="0.015"/>`).join("");
+    dotsG.innerHTML = ""; // sin los puntos blancos de giro
     movesEl.innerHTML = `${i}<small>/${total}</small>`;
     bar.style.width = `${(i / total) * 100}%`;
     bar.classList.toggle("done", i === total);
