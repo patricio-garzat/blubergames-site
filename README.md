@@ -30,15 +30,16 @@ La página está en inglés y español. El idioma se elige según el navegador y
 
 Si el juego no tiene gameplay animado, puede llevar un tablero quieto o una captura dentro del `.phone`.
 
-## Publicar con el dominio
+## Publicación
 
-Funciona con cualquier hosting de páginas estáticas.
+- La página está en **Netlify**, conectada a este repositorio: cada vez que se sube un cambio a `main`, Netlify la publica sola.
+- Dirección de Netlify: <https://blubergames.netlify.app>
+- Dominio: **blubergames.com**. Está registrado en GoDaddy y apunta a Netlify:
 
-- **GitHub Pages:**
-  1. En el repositorio, ve a Settings → Pages → Deploy from branch `main` / root.
-  2. En "Custom domain", escribe `blubergames.com`.
-  3. En tu proveedor del dominio, crea registros `A` hacia las IPs de GitHub Pages y un `CNAME` de `www` hacia `patricio-garzat.github.io`.
-- **Netlify:** importa el repositorio, sin configuración de build, y agrega el dominio en Domain settings.
+  | Tipo | Nombre | Valor |
+  |---|---|---|
+  | A | @ | `75.2.60.5` |
+  | CNAME | www | `blubergames.netlify.app` |
 
 ## Juegos
 
