@@ -217,7 +217,11 @@
     .gp-bar span, .gp-solved, .gp-stars i { transition: none; }
   }
 </style>
-<script>document.documentElement.classList.add("js");</script>
+<script>
+  document.documentElement.classList.add("js");
+  // Siempre empezar arriba: que el navegador no regrese a la posición anterior al recargar
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+</script>
 </head>
 <body>
 
@@ -416,6 +420,18 @@
   btn.addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; try { localStorage.setItem("bluber-lang", lang); } catch (e) {} apply(); });
   apply();
   document.getElementById("year").textContent = new Date().getFullYear();
+  // Al abrir o recargar, la página empieza arriba (aunque la dirección traiga #games o #studio)
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  window.scrollTo(0, 0);
+  // Links internos: bajan suave a la sección sin cambiar la dirección (así recargar no salta a la mitad)
+  const smooth = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener("click", (e) => {
+    const id = a.getAttribute("href").slice(1);
+    const target = id ? document.getElementById(id) : null;
+    e.preventDefault();
+    if (target) target.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
+    else window.scrollTo({ top: 0, behavior: smooth ? "smooth" : "auto" });
+  }));
   const top = document.getElementById("top");
   const onScroll = () => top.classList.toggle("scrolled", window.scrollY > 8);
   window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
