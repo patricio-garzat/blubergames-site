@@ -45,4 +45,4 @@ Si el juego no tiene gameplay animado, puede llevar un tablero quieto o una capt
 
 | Juego | Estado | Links |
 |---|---|---|
-| Cube Swipe | Disponible en web; App Store pronto | [Jugar](https://patricio-garzat.github.io/Puzzle-Propp-Lozenge/) · [Código](https://github.com/patricio-garzat/Puzzle-Propp-Lozenge) |
+| Cube Swipe | Disponible en web; App Store pronto | [Jugar](https://cubeswipe.blubergames.com/) · [Código](https://github.com/patricio-garzat/Puzzle-Propp-Lozenge) |
