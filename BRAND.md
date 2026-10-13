@@ -80,13 +80,13 @@ Esto salió de construir Propp Lozenge. Úsalo como punto de partida en cada jue
 - Estructura de app de iOS: inicio, ajustes, cómo jugar y récords.
 
 **Cero glitches**
-- La barra de arriba del iPhone nunca debe salir blanca en modo oscuro.
+- Las barras de arriba y de abajo del iPhone nunca deben salir de otro color que el fondo del tema.
 - No debe haber destellos al cargar.
 - Lo centrado debe estar centrado de verdad (usar `100dvh`, no `100vh`).
 - Ver las notas técnicas abajo.
 
 **Intro**
-- Al abrir un juego sale primero la intro de BluBer (unos 4 s, fondo blanco).
+- Al abrir un juego sale primero la intro de BluBer (unos 4 s), sobre el fondo del tema del juego: logo normal en modo claro y versión `dark-bg` en modo oscuro. Nunca un fondo blanco sobre una app oscura, porque Safari pinta sus barras de arriba y de abajo con el color del fondo.
 - Después viene la intro del juego. Ninguna de las dos se puede saltar.
 
 **Niveles**
