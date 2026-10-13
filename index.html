@@ -50,7 +50,10 @@
   :focus-visible { outline: 2.5px solid var(--sea); outline-offset: 3px; border-radius: 10px; }
 
   /* Aparecer suave al bajar (solo con JS y sin "reducir movimiento") */
-  .js .rv { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
+  .js .rv { opacity: 0; transform: translateY(22px); transition: opacity 1s var(--ease), transform 1s var(--ease); transition-delay: var(--d, 0s); }
+  .js .rv.zoom { transform: translateY(16px) scale(0.96); }
+  /* Rombos de la portada: se mueven un poco con el scroll (parallax suave) */
+  .stage .tile { translate: 0 calc(var(--py, 0) * 1px); }
   .js .rv.in { opacity: 1; transform: none; }
 
   /* ---------- Encabezado ---------- */
@@ -72,6 +75,10 @@
   .btn svg { width: 18px; height: 18px; }
   .btn.primary { background: var(--navy); color: #FFFFFF; box-shadow: 0 10px 26px rgba(0, 56, 91, 0.22); }
   .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0, 56, 91, 0.28); }
+  .btn.primary { position: relative; overflow: hidden; }
+  .btn.primary::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,0.28), rgba(255,255,255,0)); transform: skewX(-18deg); animation: shine 6s ease-in-out infinite; }
+  .btn.primary:hover::after { animation-duration: 1.6s; }
+  @keyframes shine { 0%, 70% { left: -60%; } 100% { left: 130%; } }
   .btn.soft { background: var(--frost); color: var(--navy); border: 1px solid var(--line); }
   .btn.soft:hover { background: var(--mist); }
   .store { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px 10px 14px; border-radius: 14px; background: var(--navy); color: #FFFFFF; text-decoration: none; opacity: .92; }
@@ -82,6 +89,9 @@
   /* ---------- Portada ---------- */
   .hero { position: relative; padding-block: 64px 96px; overflow: hidden; }
   .hero::before, .hero::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(10px); }
+  .hero::before { animation: aurora 16s ease-in-out infinite; }
+  .hero::after { animation: aurora 20s ease-in-out infinite reverse; }
+  @keyframes aurora { 33% { transform: translate(-40px, 30px) scale(1.06); } 66% { transform: translate(30px, -20px) scale(0.96); } }
   .hero::before { width: 720px; height: 720px; right: -160px; top: -180px; background: radial-gradient(circle, rgba(182, 227, 255, 0.55), rgba(242, 249, 255, 0) 68%); }
   .hero::after { width: 520px; height: 520px; left: -220px; bottom: -260px; background: radial-gradient(circle, rgba(130, 202, 253, 0.22), rgba(242, 249, 255, 0) 70%); }
   .hero .wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: 56px; }
@@ -139,7 +149,8 @@
   .app-title { grid-area: title; align-self: end; }
   .app-head .chips { grid-area: chips; align-self: start; margin-top: 0; }
   .app-actions { grid-area: actions; }
-  .app-icon { width: 112px; height: 112px; border-radius: 26px; box-shadow: 0 10px 24px rgba(18, 25, 39, 0.22); display: block; }
+  .app-icon { width: 112px; height: 112px; border-radius: 26px; box-shadow: 0 10px 24px rgba(18, 25, 39, 0.22); display: block; animation: icon 6s ease-in-out infinite; }
+  @keyframes icon { 50% { transform: translateY(-4px) rotate(-1.5deg); box-shadow: 0 16px 28px rgba(18, 25, 39, 0.2); } }
   .app-head h3 { font-size: clamp(30px, 3.4vw, 40px); font-weight: 800; }
   .app-head .sub { color: var(--ink-2); font-weight: 500; font-size: 18px; margin-top: 4px; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding: 0; list-style: none; }
@@ -149,32 +160,49 @@
 
   .shots { display: flex; gap: 18px; margin: 34px -40px 0; padding: 6px 40px 22px; scroll-padding-inline: 40px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .shots::-webkit-scrollbar { display: none; }
-  .shots img { flex: none; width: 230px; height: auto; aspect-ratio: 600 / 1304; border-radius: 30px; scroll-snap-align: start; box-shadow: 0 8px 18px rgba(18, 25, 39, 0.10); background: var(--night); }
+  .shots img { flex: none; width: 230px; height: auto; aspect-ratio: 600 / 1304; border-radius: 30px; scroll-snap-align: start; box-shadow: 0 8px 18px rgba(18, 25, 39, 0.10); background: var(--night); transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+  .shots img:hover { transform: translateY(-6px) scale(1.015); box-shadow: 0 18px 30px rgba(18, 25, 39, 0.16); }
 
   .feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
-  .feat { border: 1px solid var(--line); border-radius: var(--r); padding: 22px 22px 20px; background: linear-gradient(180deg, #FFFFFF, var(--frost)); }
+  .feat { border: 1px solid var(--line); border-radius: var(--r); padding: 22px 22px 20px; background: linear-gradient(180deg, #FFFFFF, var(--frost)); transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s; }
+  .feat:hover, .value:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(0, 56, 91, 0.09); border-color: var(--snow); }
+  .feat i, .value i { transition: transform .5s var(--ease); }
+  .feat:hover i, .value:hover i { transform: rotate(-10deg) scale(1.12); }
   .feat i { display: block; width: 30px; height: 18px; margin-bottom: 14px; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); background: var(--c); }
   .feat b { display: block; font: 800 17px var(--f-display); letter-spacing: -0.01em; margin-bottom: 4px; }
   .feat span { color: var(--ink-2); font-size: 15.5px; line-height: 1.5; }
   .credit { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-3); }
 
   .next { margin-top: 22px; border: 2px dashed var(--snow); border-radius: var(--r-lg); padding: 26px 30px; display: flex; align-items: center; gap: 20px; color: var(--ink-2); background: rgba(255, 255, 255, 0.7); }
-  .next .q { flex: none; width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; background: var(--frost); border: 1px solid var(--line); font: 800 24px var(--f-display); color: var(--ice); }
+  .next .q { flex: none; width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; background: var(--frost); border: 1px solid var(--line); font: 800 24px var(--f-display); color: var(--ice); animation: breathe 5s ease-in-out infinite; }
   .next b { display: block; font: 800 18px var(--f-display); color: var(--navy); margin-bottom: 2px; }
 
   /* ---------- Estudio ---------- */
   .studio .wrap { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
-  .floe { position: relative; display: grid; place-items: center; aspect-ratio: 1; max-width: 460px; width: 100%; justify-self: center; }
-  .floe::before { content: ""; position: absolute; inset: 6%; border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%; background: radial-gradient(circle at 35% 30%, #FFFFFF, var(--frost) 45%, #DDF0FE 100%); box-shadow: inset 0 -18px 40px rgba(80, 175, 234, 0.16); }
-  .floe .bear-mark { position: relative; width: 70%; height: auto; filter: drop-shadow(0 18px 22px rgba(0, 56, 91, 0.12)); animation: bob 9s ease-in-out infinite; }
-  .flake { position: absolute; width: 10px; height: 10px; border-radius: 3px; background: var(--snow); transform: rotate(45deg); animation: flake 7s ease-in-out infinite; }
-  .flake.f1 { top: 14%; left: 12%; } .flake.f2 { top: 22%; right: 10%; width: 7px; height: 7px; animation-delay: -2s; }
-  .flake.f3 { bottom: 16%; left: 20%; width: 6px; height: 6px; animation-delay: -4s; } .flake.f4 { bottom: 24%; right: 16%; animation-delay: -1s; background: var(--ice); }
-  @keyframes flake { 50% { transform: translateY(-10px) rotate(45deg); } }
+  /* Escena: el oso oficial sobre un témpano con forma de rombo (como los de Cube Swipe), flotando en un mar en calma */
+  .scene { position: relative; aspect-ratio: 1 / 1.04; max-width: 480px; width: 100%; justify-self: center; border-radius: 44px; overflow: hidden; isolation: isolate;
+    background: linear-gradient(180deg, #F6FBFF 0%, #EAF5FE 48%, #DCEFFD 62%, #C9E7FC 100%); border: 1px solid var(--line); box-shadow: 0 30px 70px rgba(0, 56, 91, 0.12), inset 0 1px 0 #FFFFFF; }
+  .scene .sun { position: absolute; width: 62%; aspect-ratio: 1; right: -12%; top: -14%; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0, rgba(255, 255, 255, 0.5) 30%, rgba(255, 255, 255, 0) 68%); animation: breathe 9s ease-in-out infinite; }
+  .scene .sky-tile { position: absolute; width: var(--s); height: calc(var(--s) * 0.58); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); opacity: .55; animation: float 10s ease-in-out infinite; animation-delay: var(--dl, 0s); }
+  .scene .sea { position: absolute; left: 0; right: 0; bottom: 0; height: 34%; background: linear-gradient(180deg, rgba(182, 227, 255, 0.55), rgba(130, 202, 253, 0.55)); }
+  .scene .sea::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: rgba(255, 255, 255, 0.9); }
+  .scene .waves { position: absolute; left: 0; right: 0; bottom: 0; height: 30%; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22240%22%20height%3D%2260%22%20viewBox%3D%220%200%20240%2060%22%3E%3Cpath%20d%3D%22M0%2016%20Q30%206%2060%2016%20T120%2016%20T180%2016%20T240%2016%20V60%20H0Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.32%29%22%2F%3E%3Cpath%20d%3D%22M0%2034%20Q30%2026%2060%2034%20T120%2034%20T180%2034%20T240%2034%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.75%29%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") repeat-x 0 0 / 240px 60px; animation: waves 14s linear infinite; }
+  .scene .waves.w2 { height: 20%; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22320%22%20height%3D%2260%22%20viewBox%3D%220%200%20320%2060%22%3E%3Cpath%20d%3D%22M0%2022%20Q40%2012%2080%2022%20T160%2022%20T240%2022%20T320%2022%20V60%20H0Z%22%20fill%3D%22rgba%28130%2C202%2C253%2C0.28%29%22%2F%3E%3C%2Fsvg%3E") repeat-x 0 0 / 320px 60px; animation: waves2 22s linear infinite; }
+  @keyframes waves { to { background-position-x: 240px; } }
+  @keyframes waves2 { to { background-position-x: -320px; } }
+  .scene .berg { position: absolute; left: 50%; bottom: 23%; width: 70%; transform: translateX(-50%); animation: berg 8s ease-in-out infinite; }
+  @keyframes berg { 50% { transform: translateX(-50%) translateY(-6px) rotate(-0.6deg); } }
+  .scene .berg .bear-mark { position: relative; z-index: 1; display: block; width: 74%; height: auto; margin: 0 auto; filter: drop-shadow(0 10px 14px rgba(0, 56, 91, 0.10)); }
+  .scene .ice { display: block; width: 100%; height: auto; margin-top: -14.2%; filter: drop-shadow(0 16px 18px rgba(0, 56, 91, 0.12)); }
+  .scene .shadow { position: absolute; left: 50%; bottom: 17%; width: 64%; height: 5%; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(ellipse, rgba(0, 56, 91, 0.14), rgba(0, 56, 91, 0) 70%); animation: shade 8s ease-in-out infinite; }
+  @keyframes shade { 50% { transform: translateX(-50%) scaleX(0.92); opacity: .75; } }
+  .scene .snow { position: absolute; top: -4%; width: var(--s, 7px); height: var(--s, 7px); border-radius: 2px; background: #FFFFFF; transform: rotate(45deg); box-shadow: 0 0 0 1px rgba(130, 202, 253, 0.35); animation: snow var(--t, 14s) linear infinite; animation-delay: var(--dl, 0s); opacity: 0; }
+  @keyframes snow { 0% { transform: translateY(0) rotate(45deg); opacity: 0; } 10% { opacity: .95; } 80% { opacity: .9; } 100% { transform: translate(var(--dx, 18px), 520px) rotate(225deg); opacity: 0; } }
+  @keyframes breathe { 50% { transform: scale(1.06); opacity: .85; } }
   .studio h2 { font-size: clamp(34px, 4.4vw, 52px); font-weight: 800; margin: 14px 0 22px; }
   .studio .copy p { color: var(--ink-2); font-size: 18px; max-width: 34em; margin-bottom: 14px; }
   .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
-  .value { border: 1px solid var(--line); border-radius: var(--r); padding: 20px; background: var(--paper); box-shadow: var(--shadow); }
+  .value { border: 1px solid var(--line); border-radius: var(--r); padding: 20px; background: var(--paper); box-shadow: var(--shadow); transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s; }
   .value i { display: block; width: 28px; height: 16px; margin-bottom: 14px; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); background: var(--c); }
   .value b { display: block; font: 800 16px var(--f-display); margin-bottom: 6px; }
   .value span { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
@@ -200,7 +228,7 @@
     .app-actions { grid-template-columns: 1fr 1fr; min-width: 0; margin-top: 10px; }
     .shots { margin-inline: -30px; padding-inline: 30px; scroll-padding-inline: 30px; }
     .feats { grid-template-columns: 1fr 1fr; }
-    .floe { max-width: 340px; }
+    .scene { max-width: 400px; }
   }
   @media (max-width: 620px) {
     .wrap { padding-inline: 18px; }
@@ -227,7 +255,9 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .iphone, .stage .tile, .floe .bear-mark, .flake { animation: none; }
+    .iphone, .stage .tile, .scene *, .hero::before, .hero::after, .app-icon, .next .q { animation: none !important; }
+    .scene .snow { display: none; }
+    .btn.primary::after { display: none; }
     .js .rv { opacity: 1; transform: none; transition: none; }
     .gp-bar span, .gp-solved, .gp-stars i { transition: none; }
   }
@@ -320,11 +350,11 @@
             <h3 id="cs-title">Cube Swipe</h3>
             <p class="sub" data-i="cs_sub">A relaxing cube puzzle</p>
           </div>
-          <ul class="chips" aria-label="Details">
-              <li data-i="chip1">Puzzle</li>
-              <li data-i="chip2">Free</li>
-              <li data-i="chip3">iPhone · Web</li>
-              <li data-i="chip4">English · Español</li>
+          <ul class="chips" aria-label="Details" data-stagger>
+              <li class="rv" data-i="chip1">Puzzle</li>
+              <li class="rv" data-i="chip2">Free</li>
+              <li class="rv" data-i="chip3">iPhone · Web</li>
+              <li class="rv" data-i="chip4">English · Español</li>
           </ul>
           <div class="app-actions">
             <a class="btn primary" href="https://cubeswipe.blubergames.com/" target="_blank" rel="noopener"><span data-i="play_web">Play on the web</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 14 14 6M8 6h6v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -334,21 +364,21 @@
 
         <p class="app-desc" data-i="cs_desc">Flat tiles in three colors create the illusion of a cube. Swipe around a point to turn a group of three, and rebuild the cube: yellow on top, red on the left, blue on the right. Easy to learn, and every move changes the whole picture.</p>
 
-        <div class="shots" tabindex="0" aria-label="Screenshots">
-          <img src="assets/cube-swipe/1-home.jpg" width="600" height="1304" loading="lazy" alt="Cube Swipe home screen">
-          <img src="assets/cube-swipe/2-play.jpg" width="600" height="1304" loading="lazy" alt="A shuffled 3×3×3 cube">
-          <img src="assets/cube-swipe/3-hint.jpg" width="600" height="1304" loading="lazy" alt="A hint shows where to swipe">
-          <img src="assets/cube-swipe/4-levels.jpg" width="600" height="1304" loading="lazy" alt="Level map">
-          <img src="assets/cube-swipe/5-play-light.jpg" width="600" height="1304" loading="lazy" alt="Light theme">
+        <div class="shots" tabindex="0" aria-label="Screenshots" data-stagger>
+          <img class="rv" src="assets/cube-swipe/1-home.jpg" width="600" height="1304" loading="lazy" alt="Cube Swipe home screen">
+          <img class="rv" src="assets/cube-swipe/2-play.jpg" width="600" height="1304" loading="lazy" alt="A shuffled 3×3×3 cube">
+          <img class="rv" src="assets/cube-swipe/3-hint.jpg" width="600" height="1304" loading="lazy" alt="A hint shows where to swipe">
+          <img class="rv" src="assets/cube-swipe/4-levels.jpg" width="600" height="1304" loading="lazy" alt="Level map">
+          <img class="rv" src="assets/cube-swipe/5-play-light.jpg" width="600" height="1304" loading="lazy" alt="Light theme">
         </div>
 
-        <div class="feats">
-          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="f1_t">50 levels</b><span data-i="f1_d">From 2×2×2 to 4×4×4, each one a little harder.</span></div>
-          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="f2_t">A secret level</b><span data-i="f2_d">An extreme 8×8×8 cube waits at the very end.</span></div>
-          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="f3_t">Hints you keep</b><span data-i="f3_d">Stuck? A hint shows exactly where to swipe, and unused hints are saved.</span></div>
-          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="f4_t">Free play</b><span data-i="f4_d">Easy, Medium or Hard shuffles, whenever you want.</span></div>
-          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="f5_t">Build your own</b><span data-i="f5_d">Paint the tiles and create your own challenge.</span></div>
-          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="f6_t">Calm by design</b><span data-i="f6_d">Soft sounds, gentle haptics, and light and dark themes.</span></div>
+        <div class="feats" data-stagger>
+          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="f1_t">50 levels</b><span data-i="f1_d">From 2×2×2 to 4×4×4, each one a little harder.</span></div>
+          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="f2_t">A secret level</b><span data-i="f2_d">An extreme 8×8×8 cube waits at the very end.</span></div>
+          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="f3_t">Hints you keep</b><span data-i="f3_d">Stuck? A hint shows exactly where to swipe, and unused hints are saved.</span></div>
+          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="f4_t">Free play</b><span data-i="f4_d">Easy, Medium or Hard shuffles, whenever you want.</span></div>
+          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="f5_t">Build your own</b><span data-i="f5_d">Paint the tiles and create your own challenge.</span></div>
+          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="f6_t">Calm by design</b><span data-i="f6_d">Soft sounds, gentle haptics, and light and dark themes.</span></div>
         </div>
 
         <p class="credit" data-i="credit">Inspired by the Propp Lozenge, the magnetic puzzle invented by James Propp and designed by Oskar van Deventer.</p>
@@ -363,19 +393,44 @@
 
   <section class="studio" id="studio" aria-labelledby="studio-title">
     <div class="wrap">
-      <div class="floe rv" aria-hidden="true">
-        <span class="flake f1"></span><span class="flake f2"></span><span class="flake f3"></span><span class="flake f4"></span>
-        <svg class="bear-mark" viewBox="602.8 361.9 881.7 646.8" aria-hidden="true"><path fill="#8AC7ED" d="M 1459.187 411.070 C 1455.218 406.531 1447.273 405.394 1437.058 405.394 C 1421.738 405.394 1399.609 405.960 1374.078 396.882 C 1341.167 385.535 1299.746 388.941 1256.058 400.289 C 1255.660 400.402 1255.207 400.515 1254.808 400.628 C 1224.964 381.566 1189.5 382.300 1176.054 395.183 C 1167.144 403.523 1161.527 424.460 1158.125 440.234 C 1115.113 464.574 1066.375 497.371 1005.265 526.820 C 976.328 533.062 947.390 543.843 919.019 559.164 C 859.441 590.937 802.699 640.867 754.472 704.984 C 752.203 707.824 750.5 710.093 748.230 712.929 C 706.242 770.804 670.496 840.027 645.527 916.628 C 638.152 938.757 631.910 961.453 626.804 983.582 L 749.933 983.582 C 759.578 967.695 771.492 952.941 784.542 939.890 C 795.890 928.542 807.808 918.332 821.425 909.820 C 829.480 904.429 837.539 899.605 846.105 895.238 C 846.164 904.089 846.277 915.664 845.257 923.437 C 842.988 944.429 837.312 965.425 829.937 984.714 L 932.070 984.714 C 936.890 962.191 947.730 938.417 958.511 918.613 C 964.128 941.367 971.390 963.550 980.867 983.582 L 1115.339 983.582 C 1108.531 962.585 1103.425 940.457 1100.589 917.761 C 1097.75 899.039 1096.617 880.312 1096.617 861.023 L 1096.617 845.871 C 1129.414 860.113 1158.917 883.660 1183.429 913.222 C 1200.453 933.648 1215.203 957.480 1227.121 983.582 L 1359.324 983.582 C 1357.054 959.75 1352.515 935.351 1346.273 910.953 C 1345.707 909.25 1345.140 908.117 1345.140 906.414 C 1344.003 901.308 1342.871 896.769 1341.167 891.664 C 1337.765 879.746 1333.792 867.261 1329.253 855.914 C 1315.636 819.601 1298.613 786.691 1278.753 757.187 L 1278.753 743 C 1278.753 718.035 1282.726 694.203 1289.535 671.507 C 1294.640 656.187 1300.882 641.437 1308.257 627.820 C 1316.203 613.066 1325.847 599.449 1336.628 586.964 C 1349.679 571.644 1363.863 558.593 1379.753 547.246 C 1383.722 544.410 1387.695 542.140 1391.667 539.304 C 1408.121 527.386 1428.945 504.238 1428.945 504.238 C 1429.910 502.875 1430.703 501.742 1431.328 500.718 L 1431.386 500.718 C 1445.968 482.335 1453.855 464.460 1457.484 449.085 C 1461.460 431.496 1460.890 417.878 1459.187 411.070 "/><path fill="#8AC7ED" d="M 847.527 894.5 L 862.992 859.714 L 973.058 847.832 L 958.507 918.613 "/><path fill="#57ADE1" d="M 958.507 918.613 C 947.730 938.414 936.890 962.191 932.070 984.718 L 829.937 984.718 C 837.312 965.425 842.988 944.429 845.253 923.437 C 846.277 915.664 846.164 904.089 846.105 895.238 C 846.562 895.011 847.070 894.726 847.527 894.5 C 860.007 888.257 873.058 883.152 886.675 879.179 C 906.535 872.937 928.097 869.531 950.226 869.531 C 951.929 885.988 954.765 901.875 958.167 917.195 C 958.281 917.648 958.398 918.160 958.507 918.613 "/><path fill="#57ADE1" d="M 1431.328 500.718 C 1430.707 501.742 1429.910 502.875 1428.945 504.238 C 1428.945 504.238 1408.121 527.386 1391.667 539.300 C 1387.695 542.140 1383.722 544.410 1379.753 547.246 C 1363.863 558.593 1349.679 571.644 1336.628 586.964 C 1325.847 599.449 1316.203 613.066 1308.257 627.820 C 1300.882 641.437 1294.640 656.187 1289.535 671.507 C 1282.726 694.203 1278.753 718.035 1278.753 743 L 1278.753 757.187 C 1298.613 786.691 1315.636 819.601 1329.253 855.914 C 1333.792 867.261 1337.765 879.746 1341.167 891.664 C 1342.871 896.769 1344.003 901.308 1345.140 906.414 C 1345.140 908.117 1345.707 909.25 1346.273 910.953 C 1352.515 935.351 1357.054 959.75 1359.324 983.582 L 1227.121 983.582 C 1215.203 957.480 1200.453 933.648 1183.429 913.222 C 1158.917 883.660 1129.414 860.113 1096.617 845.871 L 1096.617 844.566 C 1096.617 830.382 1098.320 816.765 1100.589 802.578 C 1109.097 743 1130.660 688.531 1161.867 642.570 C 1161.867 642.570 1162.433 641.437 1163.003 640.867 C 1175.484 623.281 1189.105 606.824 1203.855 591.503 C 1208.394 586.964 1213.503 582.425 1218.042 577.886 C 1235.062 563.132 1253.218 550.082 1272.511 538.734 C 1315.636 514.335 1364.433 500.718 1416.066 500.718 Z M 1431.328 500.718 "/><path fill="#57ADE1" d="M 1254.808 400.628 C 1242.156 403.976 1228.937 408.402 1215.773 412.773 C 1197.046 419.582 1178.324 428.660 1158.464 440.007 C 1158.351 440.062 1158.234 440.121 1158.125 440.234 C 1161.527 424.460 1167.144 403.523 1176.054 395.183 C 1189.5 382.300 1224.964 381.562 1254.808 400.628 "/><path fill="#093A5B" d="M 1457.488 449.085 C 1457.488 449.085 1439.328 445.679 1433.089 436.035 C 1425.710 424.687 1429.117 413.906 1437.058 405.394 C 1447.273 405.394 1455.214 406.531 1459.191 411.070 C 1460.890 417.878 1461.457 431.496 1457.488 449.085 "/><path fill="#8AC7ED" d="M 1305.421 438.871 C 1302.015 410.503 1354.785 422.984 1354.785 422.984 C 1354.785 422.984 1308.828 467.242 1305.421 438.871 M 1433.089 436.035 C 1425.710 424.687 1429.117 413.906 1437.058 405.394 C 1421.738 405.394 1399.609 405.960 1374.078 396.882 C 1341.167 385.535 1299.75 388.941 1256.058 400.289 C 1255.660 400.402 1255.207 400.515 1254.808 400.628 C 1242.156 403.976 1228.937 408.402 1215.773 412.773 C 1197.046 419.582 1178.324 428.660 1158.464 440.007 C 1158.351 440.062 1158.238 440.121 1158.125 440.234 C 1115.113 464.574 1066.375 497.371 1005.265 526.820 C 976.328 533.062 947.386 543.843 919.019 559.164 C 859.441 590.937 802.699 640.867 754.472 704.984 C 752.203 707.824 750.5 710.093 748.230 712.929 C 706.242 770.804 670.496 840.027 645.527 916.628 C 638.152 938.757 631.910 961.453 626.804 983.582 L 749.933 983.582 C 759.578 967.695 771.492 952.941 784.542 939.890 C 795.890 928.542 807.808 918.332 821.425 909.820 C 829.480 904.429 837.539 899.605 846.105 895.238 C 846.558 895.007 847.070 894.726 847.523 894.5 C 860.007 888.257 873.058 883.152 886.675 879.179 C 906.535 872.937 928.097 869.535 950.226 869.535 C 951.929 885.988 954.765 901.875 958.167 917.195 C 958.281 917.648 958.398 918.160 958.507 918.613 C 964.128 941.367 971.390 963.550 980.867 983.582 L 1115.339 983.582 C 1108.531 962.585 1103.425 940.457 1100.589 917.761 C 1097.75 899.039 1096.617 880.312 1096.617 861.023 L 1096.617 844.566 C 1096.617 830.382 1098.320 816.765 1100.589 802.578 C 1109.097 743 1130.660 688.531 1161.867 642.570 C 1161.867 642.570 1162.433 641.437 1163.003 640.867 C 1175.484 623.281 1189.105 606.824 1203.855 591.503 C 1208.394 586.964 1213.503 582.425 1218.042 577.886 C 1235.062 563.132 1253.218 550.082 1272.511 538.734 C 1315.636 514.335 1364.433 500.718 1416.066 500.718 L 1431.386 500.718 C 1445.968 482.335 1453.855 464.460 1457.484 449.085 C 1457.484 449.085 1439.328 445.679 1433.089 436.035 "/><path fill="#093A5B" d="M 1354.785 422.984 C 1354.785 422.984 1308.824 467.242 1305.421 438.871 C 1302.015 410.503 1354.785 422.984 1354.785 422.984 "/></svg>
+      <div class="scene rv zoom" aria-hidden="true">
+        <span class="sun"></span>
+        <i class="sky-tile" style="--s:34px; left:12%; top:14%; background: linear-gradient(160deg, var(--gt1), var(--gt2)); --dl:-2s"></i>
+        <i class="sky-tile" style="--s:24px; left:30%; top:7%; background: linear-gradient(160deg, var(--gr1), var(--gr2)); --dl:-6s"></i>
+        <i class="sky-tile" style="--s:28px; right:14%; top:30%; background: linear-gradient(160deg, var(--gl1), var(--gl2)); --dl:-4s"></i>
+        <span class="sea"></span>
+        <span class="waves"></span>
+        <span class="waves w2"></span>
+        <span class="shadow"></span>
+        <div class="berg">
+          <svg class="bear-mark" viewBox="602.8 361.9 881.7 646.8" aria-hidden="true"><path fill="#8AC7ED" d="M 1459.187 411.070 C 1455.218 406.531 1447.273 405.394 1437.058 405.394 C 1421.738 405.394 1399.609 405.960 1374.078 396.882 C 1341.167 385.535 1299.746 388.941 1256.058 400.289 C 1255.660 400.402 1255.207 400.515 1254.808 400.628 C 1224.964 381.566 1189.5 382.300 1176.054 395.183 C 1167.144 403.523 1161.527 424.460 1158.125 440.234 C 1115.113 464.574 1066.375 497.371 1005.265 526.820 C 976.328 533.062 947.390 543.843 919.019 559.164 C 859.441 590.937 802.699 640.867 754.472 704.984 C 752.203 707.824 750.5 710.093 748.230 712.929 C 706.242 770.804 670.496 840.027 645.527 916.628 C 638.152 938.757 631.910 961.453 626.804 983.582 L 749.933 983.582 C 759.578 967.695 771.492 952.941 784.542 939.890 C 795.890 928.542 807.808 918.332 821.425 909.820 C 829.480 904.429 837.539 899.605 846.105 895.238 C 846.164 904.089 846.277 915.664 845.257 923.437 C 842.988 944.429 837.312 965.425 829.937 984.714 L 932.070 984.714 C 936.890 962.191 947.730 938.417 958.511 918.613 C 964.128 941.367 971.390 963.550 980.867 983.582 L 1115.339 983.582 C 1108.531 962.585 1103.425 940.457 1100.589 917.761 C 1097.75 899.039 1096.617 880.312 1096.617 861.023 L 1096.617 845.871 C 1129.414 860.113 1158.917 883.660 1183.429 913.222 C 1200.453 933.648 1215.203 957.480 1227.121 983.582 L 1359.324 983.582 C 1357.054 959.75 1352.515 935.351 1346.273 910.953 C 1345.707 909.25 1345.140 908.117 1345.140 906.414 C 1344.003 901.308 1342.871 896.769 1341.167 891.664 C 1337.765 879.746 1333.792 867.261 1329.253 855.914 C 1315.636 819.601 1298.613 786.691 1278.753 757.187 L 1278.753 743 C 1278.753 718.035 1282.726 694.203 1289.535 671.507 C 1294.640 656.187 1300.882 641.437 1308.257 627.820 C 1316.203 613.066 1325.847 599.449 1336.628 586.964 C 1349.679 571.644 1363.863 558.593 1379.753 547.246 C 1383.722 544.410 1387.695 542.140 1391.667 539.304 C 1408.121 527.386 1428.945 504.238 1428.945 504.238 C 1429.910 502.875 1430.703 501.742 1431.328 500.718 L 1431.386 500.718 C 1445.968 482.335 1453.855 464.460 1457.484 449.085 C 1461.460 431.496 1460.890 417.878 1459.187 411.070 "/><path fill="#8AC7ED" d="M 847.527 894.5 L 862.992 859.714 L 973.058 847.832 L 958.507 918.613 "/><path fill="#57ADE1" d="M 958.507 918.613 C 947.730 938.414 936.890 962.191 932.070 984.718 L 829.937 984.718 C 837.312 965.425 842.988 944.429 845.253 923.437 C 846.277 915.664 846.164 904.089 846.105 895.238 C 846.562 895.011 847.070 894.726 847.527 894.5 C 860.007 888.257 873.058 883.152 886.675 879.179 C 906.535 872.937 928.097 869.531 950.226 869.531 C 951.929 885.988 954.765 901.875 958.167 917.195 C 958.281 917.648 958.398 918.160 958.507 918.613 "/><path fill="#57ADE1" d="M 1431.328 500.718 C 1430.707 501.742 1429.910 502.875 1428.945 504.238 C 1428.945 504.238 1408.121 527.386 1391.667 539.300 C 1387.695 542.140 1383.722 544.410 1379.753 547.246 C 1363.863 558.593 1349.679 571.644 1336.628 586.964 C 1325.847 599.449 1316.203 613.066 1308.257 627.820 C 1300.882 641.437 1294.640 656.187 1289.535 671.507 C 1282.726 694.203 1278.753 718.035 1278.753 743 L 1278.753 757.187 C 1298.613 786.691 1315.636 819.601 1329.253 855.914 C 1333.792 867.261 1337.765 879.746 1341.167 891.664 C 1342.871 896.769 1344.003 901.308 1345.140 906.414 C 1345.140 908.117 1345.707 909.25 1346.273 910.953 C 1352.515 935.351 1357.054 959.75 1359.324 983.582 L 1227.121 983.582 C 1215.203 957.480 1200.453 933.648 1183.429 913.222 C 1158.917 883.660 1129.414 860.113 1096.617 845.871 L 1096.617 844.566 C 1096.617 830.382 1098.320 816.765 1100.589 802.578 C 1109.097 743 1130.660 688.531 1161.867 642.570 C 1161.867 642.570 1162.433 641.437 1163.003 640.867 C 1175.484 623.281 1189.105 606.824 1203.855 591.503 C 1208.394 586.964 1213.503 582.425 1218.042 577.886 C 1235.062 563.132 1253.218 550.082 1272.511 538.734 C 1315.636 514.335 1364.433 500.718 1416.066 500.718 Z M 1431.328 500.718 "/><path fill="#57ADE1" d="M 1254.808 400.628 C 1242.156 403.976 1228.937 408.402 1215.773 412.773 C 1197.046 419.582 1178.324 428.660 1158.464 440.007 C 1158.351 440.062 1158.234 440.121 1158.125 440.234 C 1161.527 424.460 1167.144 403.523 1176.054 395.183 C 1189.5 382.300 1224.964 381.562 1254.808 400.628 "/><path fill="#093A5B" d="M 1457.488 449.085 C 1457.488 449.085 1439.328 445.679 1433.089 436.035 C 1425.710 424.687 1429.117 413.906 1437.058 405.394 C 1447.273 405.394 1455.214 406.531 1459.191 411.070 C 1460.890 417.878 1461.457 431.496 1457.488 449.085 "/><path fill="#8AC7ED" d="M 1305.421 438.871 C 1302.015 410.503 1354.785 422.984 1354.785 422.984 C 1354.785 422.984 1308.828 467.242 1305.421 438.871 M 1433.089 436.035 C 1425.710 424.687 1429.117 413.906 1437.058 405.394 C 1421.738 405.394 1399.609 405.960 1374.078 396.882 C 1341.167 385.535 1299.75 388.941 1256.058 400.289 C 1255.660 400.402 1255.207 400.515 1254.808 400.628 C 1242.156 403.976 1228.937 408.402 1215.773 412.773 C 1197.046 419.582 1178.324 428.660 1158.464 440.007 C 1158.351 440.062 1158.238 440.121 1158.125 440.234 C 1115.113 464.574 1066.375 497.371 1005.265 526.820 C 976.328 533.062 947.386 543.843 919.019 559.164 C 859.441 590.937 802.699 640.867 754.472 704.984 C 752.203 707.824 750.5 710.093 748.230 712.929 C 706.242 770.804 670.496 840.027 645.527 916.628 C 638.152 938.757 631.910 961.453 626.804 983.582 L 749.933 983.582 C 759.578 967.695 771.492 952.941 784.542 939.890 C 795.890 928.542 807.808 918.332 821.425 909.820 C 829.480 904.429 837.539 899.605 846.105 895.238 C 846.558 895.007 847.070 894.726 847.523 894.5 C 860.007 888.257 873.058 883.152 886.675 879.179 C 906.535 872.937 928.097 869.535 950.226 869.535 C 951.929 885.988 954.765 901.875 958.167 917.195 C 958.281 917.648 958.398 918.160 958.507 918.613 C 964.128 941.367 971.390 963.550 980.867 983.582 L 1115.339 983.582 C 1108.531 962.585 1103.425 940.457 1100.589 917.761 C 1097.75 899.039 1096.617 880.312 1096.617 861.023 L 1096.617 844.566 C 1096.617 830.382 1098.320 816.765 1100.589 802.578 C 1109.097 743 1130.660 688.531 1161.867 642.570 C 1161.867 642.570 1162.433 641.437 1163.003 640.867 C 1175.484 623.281 1189.105 606.824 1203.855 591.503 C 1208.394 586.964 1213.503 582.425 1218.042 577.886 C 1235.062 563.132 1253.218 550.082 1272.511 538.734 C 1315.636 514.335 1364.433 500.718 1416.066 500.718 L 1431.386 500.718 C 1445.968 482.335 1453.855 464.460 1457.484 449.085 C 1457.484 449.085 1439.328 445.679 1433.089 436.035 "/><path fill="#093A5B" d="M 1354.785 422.984 C 1354.785 422.984 1308.824 467.242 1305.421 438.871 C 1302.015 410.503 1354.785 422.984 1354.785 422.984 "/></svg>
+          <svg class="ice" viewBox="0 0 400 152" aria-hidden="true">
+            <defs>
+              <linearGradient id="ice-top" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EEF7FE"/></linearGradient>
+              <linearGradient id="ice-l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DDF0FE"/><stop offset="1" stop-color="#C6E5FB"/></linearGradient>
+              <linearGradient id="ice-r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9E7FC"/><stop offset="1" stop-color="#A9D8FA"/></linearGradient>
+            </defs>
+            <polygon points="6,57 200,106 200,146 6,97" fill="url(#ice-l)"/>
+            <polygon points="200,106 394,57 394,97 200,146" fill="url(#ice-r)"/>
+            <path d="M200,106 L200,146" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="1.5"/>
+            <polygon points="200,6 394,57 200,106 6,57" fill="url(#ice-top)" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <i class="snow" style="left:14%; --dl:0s; --t:15s"></i>
+        <i class="snow" style="left:32%; --s:5px; --dl:-5s; --t:12s; --dx:-14px"></i>
+        <i class="snow" style="left:55%; --s:6px; --dl:-9s; --t:17s"></i>
+        <i class="snow" style="left:72%; --dl:-3s; --t:14s; --dx:-20px"></i>
+        <i class="snow" style="left:88%; --s:5px; --dl:-11s; --t:13s"></i>
       </div>
       <div class="copy">
         <p class="eyebrow rv" data-i="studio_eyebrow">Our studio</p>
         <h2 id="studio-title" class="rv" data-i="studio_title">A small studio with a polar bear</h2>
         <p class="rv" data-i="studio_p1">BluBer Games is an independent studio that makes games for iOS. We like games that respect your time: you can play for a minute, and they still make you think.</p>
         <p class="rv" data-i="studio_p2">We care about the small things: smooth animations, calm sounds, and controls that feel natural under your finger.</p>
-        <div class="values">
+        <div class="values" data-stagger>
           <div class="value rv"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="v1_t">Made for touch</b><span data-i="v1_d">Designed for iPhone first, with gestures that feel natural.</span></div>
-          <div class="value rv" style="--d:.08s"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="v2_t">Easy to learn</b><span data-i="v2_d">Clear rules, with the depth that keeps you playing.</span></div>
-          <div class="value rv" style="--d:.16s"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="v3_t">Built with care</b><span data-i="v3_d">Every animation and sound is tuned by hand.</span></div>
+          <div class="value rv"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="v2_t">Easy to learn</b><span data-i="v2_d">Clear rules, with the depth that keeps you playing.</span></div>
+          <div class="value rv"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="v3_t">Built with care</b><span data-i="v3_d">Every animation and sound is tuned by hand.</span></div>
         </div>
       </div>
     </div>
@@ -536,6 +591,15 @@
   const top = document.getElementById("top");
   const onScroll = () => top.classList.toggle("scrolled", window.scrollY > 8);
   window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  // Escalonado: cada hijo de [data-stagger] aparece un poco después que el anterior
+  document.querySelectorAll("[data-stagger]").forEach((g) => [...g.querySelectorAll(":scope > .rv")].forEach((n, i) => n.style.setProperty("--d", (i * 0.08).toFixed(2) + "s")));
+  // Parallax suave de los rombos de la portada
+  const tiles = [...document.querySelectorAll(".stage .tile")];
+  if (tiles.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let ticking = false;
+    const par = () => { ticking = false; const y = Math.min(window.scrollY, 900); tiles.forEach((t, i) => t.style.setProperty("--py", (y * (i % 2 ? -0.12 : 0.18)).toFixed(1))); };
+    window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(par); } }, { passive: true });
+  }
   // Aparecer suave al bajar
   const rv = document.querySelectorAll(".rv");
   if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { rv.forEach((n) => n.classList.add("in")); return; }
