@@ -86,15 +86,17 @@
   .ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
   .hero-notes { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 30px; color: var(--ink-3); font-size: 14.5px; font-weight: 500; list-style: none; padding: 0; }
   .hero-notes li { display: inline-flex; align-items: center; gap: 8px; }
-  .hero-notes li::before { content: ""; width: 9px; height: 9px; border-radius: 2px; transform: rotate(45deg); background: var(--c); }
+  .hero-notes li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--sea); box-shadow: 0 0 0 4px rgba(80, 175, 234, 0.16); }
 
   /* iPhone con el gameplay */
   .stage { position: relative; display: grid; place-items: center; min-height: 540px; }
   .stage .halo { position: absolute; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle at 50% 45%, #FFFFFF 0, var(--frost) 40%, rgba(231, 243, 253, 0) 70%); }
   .stage .tile { position: absolute; width: var(--s); height: calc(var(--s) * 0.58); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); opacity: .9; animation: float 9s ease-in-out infinite; animation-delay: var(--dl, 0s); }
-  .tile.t { background: linear-gradient(160deg, var(--gt1), var(--gt2)); }
-  .tile.l { background: linear-gradient(160deg, var(--gl1), var(--gl2)); }
-  .tile.r { background: linear-gradient(160deg, var(--gr1), var(--gr2)); }
+  /* Cristales de hielo (azules de la marca; los rombos de colores son solo del juego) */
+  .stage .tile { border-radius: 4px; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.7); }
+  .tile.c1 { background: linear-gradient(160deg, #FFFFFF, var(--snow)); }
+  .tile.c2 { background: linear-gradient(160deg, var(--snow), var(--ice)); opacity: .7; }
+  .tile.c3 { background: linear-gradient(160deg, #FFFFFF, #D5ECFD); }
   @keyframes float { 50% { transform: translateY(-14px) rotate(var(--rot, 0deg)); } }
   .iphone { position: relative; width: 300px; aspect-ratio: 9 / 16.5; border-radius: 52px; padding: 11px; background: linear-gradient(145deg, #3A475F, #1A2232); box-shadow: 0 40px 80px rgba(0, 56, 91, 0.25), 0 10px 24px rgba(0, 56, 91, 0.12), inset 0 0 0 1.5px rgba(255, 255, 255, 0.12); animation: bob 8s ease-in-out infinite; }
   @keyframes bob { 50% { transform: translateY(-8px); } }
@@ -151,8 +153,8 @@
   .feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
   .feat { border: 1px solid var(--line); border-radius: var(--r); padding: 22px 22px 20px; background: linear-gradient(180deg, #FFFFFF, var(--frost)); transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s; }
   .feat:hover, .value:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(0, 56, 91, 0.09); border-color: var(--snow); }
-  .feat i, .value i { transition: transform .5s var(--ease); }
-  .feat:hover i, .value:hover i { transform: rotate(-10deg) scale(1.12); }
+  .feat i { transition: transform .5s var(--ease); }
+  .feat:hover i { transform: rotate(-10deg) scale(1.12); }
   .feat i { display: block; width: 30px; height: 18px; margin-bottom: 14px; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); background: var(--c); }
   .feat b { display: block; font: 800 17px var(--f-display); letter-spacing: -0.01em; margin-bottom: 4px; }
   .feat span { color: var(--ink-2); font-size: 15.5px; line-height: 1.5; }
@@ -168,7 +170,6 @@
   .scene { position: relative; aspect-ratio: 1 / 1.04; max-width: 480px; width: 100%; justify-self: center; border-radius: 44px; overflow: hidden; isolation: isolate;
     background: linear-gradient(180deg, #F6FBFF 0%, #EAF5FE 48%, #DCEFFD 62%, #C9E7FC 100%); border: 1px solid var(--line); box-shadow: 0 30px 70px rgba(0, 56, 91, 0.12), inset 0 1px 0 #FFFFFF; }
   .scene .sun { position: absolute; width: 62%; aspect-ratio: 1; right: -12%; top: -14%; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0, rgba(255, 255, 255, 0.5) 30%, rgba(255, 255, 255, 0) 68%); animation: breathe 9s ease-in-out infinite; }
-  .scene .sky-tile { position: absolute; width: var(--s); height: calc(var(--s) * 0.58); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); opacity: .55; animation: float 10s ease-in-out infinite; animation-delay: var(--dl, 0s); }
   .scene .sea { position: absolute; left: 0; right: 0; bottom: 0; height: 34%; background: linear-gradient(180deg, rgba(182, 227, 255, 0.55), rgba(130, 202, 253, 0.55)); }
   .scene .sea::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: rgba(255, 255, 255, 0.9); }
   .scene .waves { position: absolute; left: 0; right: 0; bottom: 0; height: 30%; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22240%22%20height%3D%2260%22%20viewBox%3D%220%200%20240%2060%22%3E%3Cpath%20d%3D%22M0%2016%20Q30%206%2060%2016%20T120%2016%20T180%2016%20T240%2016%20V60%20H0Z%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.32%29%22%2F%3E%3Cpath%20d%3D%22M0%2034%20Q30%2026%2060%2034%20T120%2034%20T180%2034%20T240%2034%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.75%29%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E") repeat-x 0 0 / 240px 60px; animation: waves 14s linear infinite; }
@@ -188,7 +189,9 @@
   .studio .copy p { color: var(--ink-2); font-size: 18px; max-width: 34em; margin-bottom: 14px; }
   .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
   .value { border: 1px solid var(--line); border-radius: var(--r); padding: 20px; background: var(--paper); box-shadow: var(--shadow); transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s; }
-  .value i { display: block; width: 28px; height: 16px; margin-bottom: 14px; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); background: var(--c); }
+  .value .ic { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 14px; border-radius: 13px; background: var(--frost); border: 1px solid var(--line); color: var(--sea); transition: transform .5s var(--ease); }
+  .value .ic svg { width: 22px; height: 22px; }
+  .value:hover .ic { transform: rotate(-8deg) scale(1.08); }
   .value b { display: block; font: 800 16px var(--f-display); margin-bottom: 6px; }
   .value span { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
 
@@ -279,18 +282,18 @@
           <a class="btn soft" href="#games" data-i="cta_games">See our games</a>
         </div>
         <ul class="hero-notes rv" style="--d:.2s">
-          <li style="--c: var(--gt2)" data-i="note1">No ads</li>
-          <li style="--c: var(--gl2)" data-i="note2">Plays offline</li>
-          <li style="--c: var(--gr2)" data-i="note3">Made with care</li>
+          <li data-i="note1">No ads</li>
+          <li data-i="note2">Plays offline</li>
+          <li data-i="note3">Made with care</li>
         </ul>
       </div>
 
       <div class="stage rv" style="--d:.1s">
         <span class="halo" aria-hidden="true"></span>
-        <i class="tile t" aria-hidden="true" style="--s:84px; left:6%; top:12%; --rot:-6deg"></i>
-        <i class="tile r" aria-hidden="true" style="--s:64px; right:8%; top:20%; --dl:-3s; --rot:8deg"></i>
-        <i class="tile l" aria-hidden="true" style="--s:72px; left:10%; bottom:16%; --dl:-5s; --rot:6deg"></i>
-        <i class="tile t" aria-hidden="true" style="--s:52px; right:12%; bottom:10%; --dl:-2s; --rot:-8deg"></i>
+        <i class="tile c1" aria-hidden="true" style="--s:84px; left:6%; top:12%; --rot:-6deg"></i>
+        <i class="tile c2" aria-hidden="true" style="--s:64px; right:8%; top:20%; --dl:-3s; --rot:8deg"></i>
+        <i class="tile c3" aria-hidden="true" style="--s:72px; left:10%; bottom:16%; --dl:-5s; --rot:6deg"></i>
+        <i class="tile c2" aria-hidden="true" style="--s:52px; right:12%; bottom:10%; --dl:-2s; --rot:-8deg"></i>
         <div class="iphone">
           <div class="screen" role="img" aria-label="Cube Swipe gameplay" data-i-aria="ph_aria">
             <span class="island" aria-hidden="true"></span>
@@ -369,9 +372,6 @@
     <div class="wrap">
       <div class="scene rv zoom" aria-hidden="true">
         <span class="sun"></span>
-        <i class="sky-tile" style="--s:34px; left:12%; top:14%; background: linear-gradient(160deg, var(--gt1), var(--gt2)); --dl:-2s"></i>
-        <i class="sky-tile" style="--s:24px; left:30%; top:7%; background: linear-gradient(160deg, var(--gr1), var(--gr2)); --dl:-6s"></i>
-        <i class="sky-tile" style="--s:28px; right:14%; top:30%; background: linear-gradient(160deg, var(--gl1), var(--gl2)); --dl:-4s"></i>
         <span class="sea"></span>
         <span class="waves"></span>
         <span class="waves w2"></span>
@@ -402,9 +402,9 @@
         <p class="rv" data-i="studio_p1">BluBer Games is an independent studio that makes games for iOS. We like games that respect your time: you can play for a minute, and they still make you think.</p>
         <p class="rv" data-i="studio_p2">We care about the small things: smooth animations, calm sounds, and controls that feel natural under your finger.</p>
         <div class="values" data-stagger>
-          <div class="value rv"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="v1_t">Made for touch</b><span data-i="v1_d">Designed for iPhone first, with gestures that feel natural.</span></div>
-          <div class="value rv"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="v2_t">Easy to learn</b><span data-i="v2_d">Clear rules, with the depth that keeps you playing.</span></div>
-          <div class="value rv"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="v3_t">Built with care</b><span data-i="v3_d">Every animation and sound is tuned by hand.</span></div>
+          <div class="value rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10"/><path d="M12 10V8.5a1.5 1.5 0 0 1 3 0V11"/><path d="M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.9-2.5L4.3 15.2a1.5 1.5 0 0 1 2.3-1.9L9 15.5"/></svg></span><b data-i="v1_t">Made for touch</b><span data-i="v1_d">Designed for iPhone first, with gestures that feel natural.</span></div>
+          <div class="value rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg></span><b data-i="v2_t">Easy to learn</b><span data-i="v2_d">Clear rules, with the depth that keeps you playing.</span></div>
+          <div class="value rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span><b data-i="v3_t">Built with care</b><span data-i="v3_d">Every animation and sound is tuned by hand.</span></div>
         </div>
       </div>
     </div>

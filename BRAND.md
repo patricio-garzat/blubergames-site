@@ -54,6 +54,8 @@ Reglas:
 
 Cada juego puede tener su propia paleta. Cube Swipe, por ejemplo, usa amarillo, rojo y azul en los rombos y un fondo nocturno `#1C2535`. Lo que siempre es de BluBer es la intro y la landing.
 
+**Los rombos de colores (amarillo, rojo y azul) son solo de Cube Swipe.** En la landing y en todo lo que sea del estudio, usa los azules de la marca (Sea, Ice, Snow, Frost). Los rombos de colores van solo en lo que sea del juego: su ficha, su gameplay, sus capturas y sus imágenes.
+
 ## Tipografía
 
 - **Títulos y logo:** Montserrat (600 a 800), de Google Fonts. Es la misma familia del logo.
