@@ -86,7 +86,7 @@ Esto salió de construir Propp Lozenge. Úsalo como punto de partida en cada jue
 - Ver las notas técnicas abajo.
 
 **Intro**
-- Al abrir un juego sale primero la intro de BluBer (unos 4 s), sobre el fondo del tema del juego: logo normal en modo claro y versión `dark-bg` en modo oscuro. Nunca un fondo blanco sobre una app oscura, porque Safari pinta sus barras de arriba y de abajo con el color del fondo.
+- Al abrir un juego sale primero la intro de BluBer (unos 4 s), siempre con todo el fondo blanco, también en modo oscuro. La página carga con el fondo del tema y pasa a blanco justo después de cargar. Durante la intro, `<html>` también va en blanco para que no se asome una franja oscura abajo; al terminar regresa al fondo del tema.
 - Después viene la intro del juego. Ninguna de las dos se puede saltar.
 
 **Niveles**
