@@ -10,7 +10,7 @@ const path = require("path");
     args: ["--allow-file-access-from-files"],
   });
   const page = await browser.newPage();
-  await page.setViewport({ width: 1200, height: 1500, deviceScaleFactor: 1 });
+  await page.setViewport({ width: 1200, height: 1500, deviceScaleFactor: 2 });
   await page.goto("file://" + path.join(__dirname, "designs.html"), { waitUntil: "networkidle0" });
   await page.evaluate(() => document.fonts.ready);
   await new Promise((r) => setTimeout(r, 500));

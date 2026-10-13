@@ -6,11 +6,11 @@ Todo va en inglés.
 
 | Archivo | Uso | Tamaño |
 |---|---|---|
-| `profile-bear.png` | Foto de perfil (oso sobre blanco) | 1080 × 1080 |
-| `profile-bear-navy.png` | Foto de perfil alternativa (oso sobre azul marino) | 1080 × 1080 |
-| `post-1-hello.png` | Publicación 1: presentación del estudio | 1080 × 1350 (4:5) |
-| `post-2-cube-swipe.png` | Publicación 2: Cube Swipe, nuestro primer juego | 1080 × 1350 (4:5) |
-| `post-3-how-to-play.png` | Publicación 3: cómo se juega | 1080 × 1350 (4:5) |
+| `profile-bear.png` | Foto de perfil (oso sobre blanco) | 2160 × 2160 |
+| `profile-bear-navy.png` | Foto de perfil alternativa (oso sobre azul marino) | 2160 × 2160 |
+| `post-1-hello.png` | Publicación 1: presentación del estudio | 2160 × 2700 (4:5) |
+| `post-2-cube-swipe.png` | Publicación 2: Cube Swipe, nuestro primer juego | 2160 × 2700 (4:5) |
+| `post-3-how-to-play.png` | Publicación 3: cómo se juega | 2160 × 2700 (4:5) |
 
 Las imágenes se generan desde `src/designs.html` con `src/render.js` (Chrome sin ventana).
 
