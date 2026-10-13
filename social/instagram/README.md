@@ -20,7 +20,7 @@ Las imágenes se generan desde `src/designs.html` con `src/render.js` (Chrome si
 - **Category:** `Video Game Developer`. Si no aparece, usa `Video Game`.
 - **Bio:**
   ```
-  Indie studio making calm, beautiful games for iPhone 🐻‍❄️
+  Indie studio making calm, beautiful games for iOS 🐻‍❄️
   🧩 Cube Swipe, coming soon to the App Store
   ```
 - **Link:** `https://blubergames.com`
@@ -33,7 +33,7 @@ Publícalas en orden: 1, luego 2, luego 3.
 ```
 Hi, we're BluBer Games 🐻‍❄️
 
-A small indie studio making calm, beautiful games for iPhone. Easy to start, hard to put down.
+A small indie studio making calm, beautiful games for iOS. Easy to start, hard to put down.
 
 Our first game is almost here. Stay tuned 👀
 
