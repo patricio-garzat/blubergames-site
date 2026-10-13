@@ -94,14 +94,14 @@
   .hero-notes li::before { content: ""; width: 9px; height: 9px; border-radius: 2px; transform: rotate(45deg); background: var(--c); }
 
   /* iPhone con el gameplay */
-  .stage { position: relative; display: grid; place-items: center; min-height: 600px; }
+  .stage { position: relative; display: grid; place-items: center; min-height: 540px; }
   .stage .halo { position: absolute; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle at 50% 45%, #FFFFFF 0, var(--frost) 40%, rgba(231, 243, 253, 0) 70%); }
   .stage .tile { position: absolute; width: var(--s); height: calc(var(--s) * 0.58); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); opacity: .9; animation: float 9s ease-in-out infinite; animation-delay: var(--dl, 0s); }
   .tile.t { background: linear-gradient(160deg, var(--gt1), var(--gt2)); }
   .tile.l { background: linear-gradient(160deg, var(--gl1), var(--gl2)); }
   .tile.r { background: linear-gradient(160deg, var(--gr1), var(--gr2)); }
   @keyframes float { 50% { transform: translateY(-14px) rotate(var(--rot, 0deg)); } }
-  .iphone { position: relative; width: 300px; aspect-ratio: 9 / 19.3; border-radius: 52px; padding: 11px; background: linear-gradient(145deg, #3A475F, #1A2232); box-shadow: 0 40px 80px rgba(0, 56, 91, 0.25), 0 10px 24px rgba(0, 56, 91, 0.12), inset 0 0 0 1.5px rgba(255, 255, 255, 0.12); animation: bob 8s ease-in-out infinite; }
+  .iphone { position: relative; width: 300px; aspect-ratio: 9 / 16.5; border-radius: 52px; padding: 11px; background: linear-gradient(145deg, #3A475F, #1A2232); box-shadow: 0 40px 80px rgba(0, 56, 91, 0.25), 0 10px 24px rgba(0, 56, 91, 0.12), inset 0 0 0 1.5px rgba(255, 255, 255, 0.12); animation: bob 8s ease-in-out infinite; }
   @keyframes bob { 50% { transform: translateY(-8px); } }
   .screen { position: relative; height: 100%; border-radius: 42px; background: var(--night); overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; padding: 50px 16px 18px; color: #FFFFFF; }
   .island { position: absolute; top: 12px; left: 50%; width: 92px; height: 27px; transform: translateX(-50%); border-radius: 999px; background: #05080D; }
@@ -194,7 +194,7 @@
     .hero { text-align: center; padding-block: 36px 72px; }
     .hero .lead { margin-inline: auto; }
     .ctas, .hero-notes { justify-content: center; }
-    .stage { min-height: 560px; }
+    .stage { min-height: 500px; }
     .app { padding: 30px; }
     .app-head { grid-template-columns: auto 1fr; grid-template-areas: "icon title" "icon chips" "actions actions"; }
     .app-actions { grid-template-columns: 1fr 1fr; min-width: 0; margin-top: 10px; }
@@ -206,7 +206,7 @@
     .wrap { padding-inline: 18px; }
     .nav a { display: none; }
     section { padding-block: 64px; }
-    .stage { min-height: 520px; }
+    .stage { min-height: 460px; }
     .stage .halo { width: 380px; height: 380px; }
     .iphone { width: 260px; border-radius: 46px; }
     .screen { border-radius: 36px; padding-top: 46px; }
