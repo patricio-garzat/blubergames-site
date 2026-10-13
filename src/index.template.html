@@ -1,0 +1,430 @@
+{{HEAD_TOP}}<style>
+  /* BluBer Games · landing. Estudio de juegos para iOS con sensación de calma:
+     mucho aire, superficies de hielo muy claras, esquinas redondeadas tipo iOS y movimiento suave.
+     Estructura: encabezado de vidrio · portada (texto + iPhone con gameplay) · juegos (ficha tipo App Store)
+     · próximo juego · estudio · pie. Se genera con src/build.py a partir de esta plantilla. */
+  :root {
+    --paper: #FFFFFF;
+    --frost: #F2F9FF;      /* superficies frías muy claras */
+    --mist: #E7F3FD;       /* hielo un poco más marcado */
+    --navy: #00385B;       /* títulos y texto principal */
+    --ink-2: #3E5F78;      /* texto secundario */
+    --ink-3: #6A8296;      /* texto terciario */
+    --sea: #50AFEA;        /* acentos */
+    --ice: #82CAFD;
+    --snow: #B6E3FF;
+    --line: #DCEBF6;
+    --night: #1C2535;      /* pantalla del juego */
+    --gt1: #FFDB7E; --gt2: #F5B12C; --gl1: #FF9884; --gl2: #EC5F48; --gr1: #8FA9FF; --gr2: #5371E6;
+    --f-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    --f-body: "Figtree", "Helvetica Neue", Arial, sans-serif;
+    --r-lg: 32px; --r: 22px; --r-sm: 16px;
+    --shadow: 0 1px 2px rgba(0, 56, 91, 0.04), 0 12px 36px rgba(0, 56, 91, 0.07);
+    --ease: cubic-bezier(.2, .7, .2, 1);
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { margin: 0; background: var(--paper); color: var(--navy); font: 400 17px/1.6 var(--f-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; }
+  img, svg { max-width: 100%; }
+  .wrap { width: min(1160px, 100%); margin-inline: auto; padding-inline: 28px; }
+  h1, h2, h3 { font-family: var(--f-display); letter-spacing: -0.03em; line-height: 1.06; margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  .eyebrow { font: 700 12.5px var(--f-display); letter-spacing: 0.18em; text-transform: uppercase; color: var(--sea); }
+  :focus-visible { outline: 2.5px solid var(--sea); outline-offset: 3px; border-radius: 10px; }
+
+  /* Aparecer suave al bajar (solo con JS y sin "reducir movimiento") */
+  .js .rv { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
+  .js .rv.in { opacity: 1; transform: none; }
+
+  /* ---------- Encabezado ---------- */
+  .top { position: sticky; top: 0; z-index: 20; background: rgba(255, 255, 255, 0.78); backdrop-filter: saturate(1.6) blur(16px); -webkit-backdrop-filter: saturate(1.6) blur(16px); border-bottom: 1px solid transparent; transition: border-color .3s, background .3s; padding-top: env(safe-area-inset-top, 0px); }
+  .top.scrolled { border-bottom-color: var(--line); background: rgba(255, 255, 255, 0.9); }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand .bear-mark { width: 46px; height: auto; }
+  .brand b { font: 800 19px var(--f-display); letter-spacing: -0.02em; }
+  .brand b span { color: var(--sea); font-weight: 700; letter-spacing: 0.1em; font-size: 12px; margin-left: 7px; text-transform: uppercase; }
+  .nav { display: flex; align-items: center; gap: 4px; }
+  .nav a { text-decoration: none; font: 600 15px var(--f-body); padding: 8px 14px; border-radius: 999px; color: var(--ink-2); transition: background .2s, color .2s; }
+  .nav a:hover { color: var(--navy); background: var(--frost); }
+  .lang { margin-left: 6px; font: 700 13px var(--f-display); letter-spacing: 0.04em; color: var(--navy); background: var(--paper); border: 1.5px solid var(--line); border-radius: 999px; padding: 7px 13px; cursor: pointer; transition: border-color .2s; }
+  .lang:hover { border-color: var(--ice); }
+
+  /* ---------- Botones ---------- */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font: 700 16px var(--f-display); letter-spacing: -0.01em; padding: 16px 24px; border-radius: 999px; border: 0; cursor: pointer; transition: transform .25s var(--ease), box-shadow .25s, background .25s; }
+  .btn svg { width: 18px; height: 18px; }
+  .btn.primary { background: var(--navy); color: #FFFFFF; box-shadow: 0 10px 26px rgba(0, 56, 91, 0.22); }
+  .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0, 56, 91, 0.28); }
+  .btn.soft { background: var(--frost); color: var(--navy); border: 1px solid var(--line); }
+  .btn.soft:hover { background: var(--mist); }
+  .store { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px 10px 14px; border-radius: 14px; background: var(--navy); color: #FFFFFF; text-decoration: none; opacity: .92; }
+  .store svg { width: 24px; height: 24px; }
+  .store small { display: block; font: 600 10.5px/1.1 var(--f-body); letter-spacing: 0.02em; opacity: .75; }
+  .store b { display: block; font: 700 16px/1.15 var(--f-display); letter-spacing: -0.01em; }
+
+  /* ---------- Portada ---------- */
+  .hero { position: relative; padding-block: 64px 96px; overflow: hidden; }
+  .hero::before, .hero::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(10px); }
+  .hero::before { width: 720px; height: 720px; right: -160px; top: -180px; background: radial-gradient(circle, rgba(182, 227, 255, 0.55), rgba(242, 249, 255, 0) 68%); }
+  .hero::after { width: 520px; height: 520px; left: -220px; bottom: -260px; background: radial-gradient(circle, rgba(130, 202, 253, 0.22), rgba(242, 249, 255, 0) 70%); }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: 56px; }
+  .hero h1 { font-size: clamp(44px, 6.2vw, 80px); font-weight: 800; margin-top: 18px; }
+  .hero h1 em { font-style: normal; color: var(--sea); }
+  .hero .lead { font-size: clamp(17px, 1.5vw, 20px); color: var(--ink-2); max-width: 31em; margin: 22px 0 34px; }
+  .ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+  .hero-notes { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 30px; color: var(--ink-3); font-size: 14.5px; font-weight: 500; list-style: none; padding: 0; }
+  .hero-notes li { display: inline-flex; align-items: center; gap: 8px; }
+  .hero-notes li::before { content: ""; width: 9px; height: 9px; border-radius: 2px; transform: rotate(45deg); background: var(--c); }
+
+  /* iPhone con el gameplay */
+  .stage { position: relative; display: grid; place-items: center; min-height: 600px; }
+  .stage .halo { position: absolute; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle at 50% 45%, #FFFFFF 0, var(--frost) 40%, rgba(231, 243, 253, 0) 70%); }
+  .stage .tile { position: absolute; width: var(--s); height: calc(var(--s) * 0.58); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); opacity: .9; animation: float 9s ease-in-out infinite; animation-delay: var(--dl, 0s); }
+  .tile.t { background: linear-gradient(160deg, var(--gt1), var(--gt2)); }
+  .tile.l { background: linear-gradient(160deg, var(--gl1), var(--gl2)); }
+  .tile.r { background: linear-gradient(160deg, var(--gr1), var(--gr2)); }
+  @keyframes float { 50% { transform: translateY(-14px) rotate(var(--rot, 0deg)); } }
+  .iphone { position: relative; width: 300px; aspect-ratio: 9 / 19.3; border-radius: 52px; padding: 11px; background: linear-gradient(145deg, #3A475F, #1A2232); box-shadow: 0 40px 80px rgba(0, 56, 91, 0.25), 0 10px 24px rgba(0, 56, 91, 0.12), inset 0 0 0 1.5px rgba(255, 255, 255, 0.12); animation: bob 8s ease-in-out infinite; }
+  @keyframes bob { 50% { transform: translateY(-8px); } }
+  .screen { position: relative; height: 100%; border-radius: 42px; background: var(--night); overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; padding: 50px 16px 18px; color: #FFFFFF; }
+  .island { position: absolute; top: 12px; left: 50%; width: 92px; height: 27px; transform: translateX(-50%); border-radius: 999px; background: #05080D; }
+  .phone-top { display: flex; align-items: center; justify-content: space-between; font: 800 13px var(--f-display); }
+  .phone-top i { font-style: normal; font-weight: 700; font-size: 10.5px; padding: 3px 9px; border-radius: 999px; background: #6F8EF7; color: #14213D; }
+  .phone-stats { display: flex; align-items: center; gap: 8px; margin-top: 12px; font: 800 12.5px var(--f-display); font-variant-numeric: tabular-nums; }
+  .phone-stats small { font-size: 9.5px; opacity: 0.6; font-weight: 600; }
+  .gp-bar { flex: 1; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
+  .gp-bar span { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, #FF7B63, #FFC94F); transition: width 0.35s ease; }
+  .gp-bar span.done { background: #2FB27F; }
+  .gp-stage { position: relative; display: grid; place-items: center; align-self: center; }
+  .screen svg { width: 100%; height: auto; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35)); }
+  .gp-solved { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 6px; pointer-events: none; opacity: 0; transform: scale(0.85); transition: opacity 0.35s ease, transform 0.45s cubic-bezier(.2,1.5,.4,1); }
+  .gp-solved.on { opacity: 1; transform: none; }
+  .gp-solved b { font: 800 22px var(--f-display); color: #FFFFFF; padding: 6px 16px; border-radius: 999px; background: rgba(18, 16, 42, 0.78); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4); }
+  .gp-stars { display: flex; gap: 4px; }
+  .gp-stars i { width: 22px; height: 22px; background: #FFC94F; clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); transform: scale(0); transition: transform 0.4s cubic-bezier(.2,1.8,.4,1); filter: drop-shadow(0 2px 4px rgba(0,0,0,.4)); }
+  .gp-solved.on .gp-stars i { transform: scale(1); }
+  .gp-solved.on .gp-stars i:nth-child(2) { transition-delay: 0.15s; } .gp-solved.on .gp-stars i:nth-child(3) { transition-delay: 0.3s; }
+  .phone-bar { display: flex; justify-content: space-around; padding: 10px 0; border-radius: 16px; background: rgba(255, 255, 255, 0.06); }
+  .phone-bar span { width: 18px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.28); }
+
+  /* ---------- Secciones ---------- */
+  section { padding-block: 96px; }
+  .sec-head { display: grid; justify-items: center; text-align: center; gap: 14px; margin-bottom: 48px; }
+  .sec-head h2 { font-size: clamp(34px, 4.4vw, 52px); font-weight: 800; }
+  .sec-head p { color: var(--ink-2); max-width: 34em; font-size: 18px; }
+  .sec-head .eyebrow, .studio .copy .eyebrow { color: var(--sea); font-size: 12.5px; margin: 0; }
+  .games { background: linear-gradient(180deg, var(--paper) 0, var(--frost) 120px, var(--frost) calc(100% - 120px), var(--paper) 100%); }
+
+  /* Ficha del juego (como una página de la App Store) */
+  .app { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 40px; }
+  .app-head { display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "icon title actions" "icon chips actions"; column-gap: 24px; row-gap: 12px; align-items: center; }
+  .app-head .app-icon { grid-area: icon; }
+  .app-title { grid-area: title; align-self: end; }
+  .app-head .chips { grid-area: chips; align-self: start; margin-top: 0; }
+  .app-actions { grid-area: actions; }
+  .app-icon { width: 112px; height: 112px; border-radius: 26px; box-shadow: 0 10px 24px rgba(18, 25, 39, 0.22); display: block; }
+  .app-head h3 { font-size: clamp(30px, 3.4vw, 40px); font-weight: 800; }
+  .app-head .sub { color: var(--ink-2); font-weight: 500; font-size: 18px; margin-top: 4px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding: 0; list-style: none; }
+  .chips li { font-size: 13px; font-weight: 600; color: var(--ink-2); background: var(--frost); border: 1px solid var(--line); padding: 5px 12px; border-radius: 999px; }
+  .app-actions { display: grid; gap: 10px; justify-items: stretch; min-width: 230px; }
+  .app-desc { margin-top: 30px; color: var(--ink-2); font-size: 18px; max-width: 46em; }
+
+  .shots { display: flex; gap: 18px; margin: 34px -40px 0; padding: 6px 40px 22px; scroll-padding-inline: 40px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .shots::-webkit-scrollbar { display: none; }
+  .shots img { flex: none; width: 230px; height: auto; aspect-ratio: 600 / 1304; border-radius: 30px; scroll-snap-align: start; box-shadow: 0 8px 18px rgba(18, 25, 39, 0.10); background: var(--night); }
+
+  .feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
+  .feat { border: 1px solid var(--line); border-radius: var(--r); padding: 22px 22px 20px; background: linear-gradient(180deg, #FFFFFF, var(--frost)); }
+  .feat i { display: block; width: 30px; height: 18px; margin-bottom: 14px; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); background: var(--c); }
+  .feat b { display: block; font: 800 17px var(--f-display); letter-spacing: -0.01em; margin-bottom: 4px; }
+  .feat span { color: var(--ink-2); font-size: 15.5px; line-height: 1.5; }
+  .credit { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-3); }
+
+  .next { margin-top: 22px; border: 2px dashed var(--snow); border-radius: var(--r-lg); padding: 26px 30px; display: flex; align-items: center; gap: 20px; color: var(--ink-2); background: rgba(255, 255, 255, 0.7); }
+  .next .q { flex: none; width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; background: var(--frost); border: 1px solid var(--line); font: 800 24px var(--f-display); color: var(--ice); }
+  .next b { display: block; font: 800 18px var(--f-display); color: var(--navy); margin-bottom: 2px; }
+
+  /* ---------- Estudio ---------- */
+  .studio .wrap { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
+  .floe { position: relative; display: grid; place-items: center; aspect-ratio: 1; max-width: 460px; width: 100%; justify-self: center; }
+  .floe::before { content: ""; position: absolute; inset: 6%; border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%; background: radial-gradient(circle at 35% 30%, #FFFFFF, var(--frost) 45%, #DDF0FE 100%); box-shadow: inset 0 -18px 40px rgba(80, 175, 234, 0.16); }
+  .floe .bear-mark { position: relative; width: 70%; height: auto; filter: drop-shadow(0 18px 22px rgba(0, 56, 91, 0.12)); animation: bob 9s ease-in-out infinite; }
+  .flake { position: absolute; width: 10px; height: 10px; border-radius: 3px; background: var(--snow); transform: rotate(45deg); animation: flake 7s ease-in-out infinite; }
+  .flake.f1 { top: 14%; left: 12%; } .flake.f2 { top: 22%; right: 10%; width: 7px; height: 7px; animation-delay: -2s; }
+  .flake.f3 { bottom: 16%; left: 20%; width: 6px; height: 6px; animation-delay: -4s; } .flake.f4 { bottom: 24%; right: 16%; animation-delay: -1s; background: var(--ice); }
+  @keyframes flake { 50% { transform: translateY(-10px) rotate(45deg); } }
+  .studio h2 { font-size: clamp(34px, 4.4vw, 52px); font-weight: 800; margin: 14px 0 22px; }
+  .studio .copy p { color: var(--ink-2); font-size: 18px; max-width: 34em; margin-bottom: 14px; }
+  .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+  .value { border: 1px solid var(--line); border-radius: var(--r); padding: 20px; background: var(--paper); box-shadow: var(--shadow); }
+  .value i { display: block; width: 28px; height: 16px; margin-bottom: 14px; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); background: var(--c); }
+  .value b { display: block; font: 800 16px var(--f-display); margin-bottom: 6px; }
+  .value span { font-size: 15px; color: var(--ink-2); line-height: 1.5; }
+
+  /* ---------- Pie ---------- */
+  footer { background: var(--frost); border-top: 1px solid var(--line); padding-block: 48px calc(40px + env(safe-area-inset-bottom, 0px)); }
+  footer .wrap { display: grid; grid-template-columns: auto 1fr; gap: 28px 48px; align-items: center; }
+  footer .logo-full { width: 128px; height: auto; display: block; }
+  footer nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px 22px; font-size: 15px; font-weight: 600; }
+  footer nav a { text-decoration: none; color: var(--ink-2); white-space: nowrap; }
+  footer nav a:hover { color: var(--navy); }
+  footer .legal { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--ink-3); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .hero .wrap, .studio .wrap { grid-template-columns: 1fr; }
+    .hero { text-align: center; padding-block: 36px 72px; }
+    .hero .lead { margin-inline: auto; }
+    .ctas, .hero-notes { justify-content: center; }
+    .stage { min-height: 560px; }
+    .app { padding: 30px; }
+    .app-head { grid-template-columns: auto 1fr; grid-template-areas: "icon title" "icon chips" "actions actions"; }
+    .app-actions { grid-template-columns: 1fr 1fr; min-width: 0; margin-top: 10px; }
+    .shots { margin-inline: -30px; padding-inline: 30px; scroll-padding-inline: 30px; }
+    .feats { grid-template-columns: 1fr 1fr; }
+    .floe { max-width: 340px; }
+  }
+  @media (max-width: 620px) {
+    .wrap { padding-inline: 18px; }
+    .nav a { display: none; }
+    section { padding-block: 64px; }
+    .stage { min-height: 520px; }
+    .stage .halo { width: 380px; height: 380px; }
+    .iphone { width: 260px; border-radius: 46px; }
+    .screen { border-radius: 36px; padding-top: 46px; }
+    .ctas { flex-direction: column; align-items: stretch; }
+    .app { padding: 22px; border-radius: 26px; }
+    .app-head { column-gap: 16px; grid-template-areas: "icon title" "chips chips" "actions actions"; }
+    .app-title { align-self: center; }
+    .app-head h3 { font-size: 28px; }
+    .app-head .sub { font-size: 16px; }
+    .app-icon { width: 84px; height: 84px; border-radius: 20px; }
+    .app-actions { grid-template-columns: 1fr; }
+    .shots { margin-inline: -22px; padding-inline: 22px; scroll-padding-inline: 22px; gap: 14px; }
+    .shots img { width: 190px; border-radius: 26px; }
+    .feats, .values { grid-template-columns: 1fr; }
+    .next { padding: 20px; }
+    footer .wrap { grid-template-columns: 1fr; }
+    footer nav { justify-content: flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .iphone, .stage .tile, .floe .bear-mark, .flake { animation: none; }
+    .js .rv { opacity: 1; transform: none; transition: none; }
+    .gp-bar span, .gp-solved, .gp-stars i { transition: none; }
+  }
+</style>
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="BluBer Games"><svg class="bear-mark" viewBox="{{BEAR_VB}}" aria-hidden="true">{{BEAR}}</svg><b>BluBer<span>Games</span></b></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#games" data-i="nav_games">Games</a>
+      <a href="#studio" data-i="nav_studio">Studio</a>
+      <a href="/support/" data-i="nav_support">Support</a>
+      <button class="lang" type="button" id="lang" aria-label="Español">ES</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow rv" data-i="eyebrow">Independent iOS game studio</p>
+        <h1 id="hero-title" class="rv" style="--d:.05s" data-i="h1">Calm games,<br>made for <em>iOS</em>.</h1>
+        <p class="lead rv" style="--d:.1s" data-i="lead">We make relaxing puzzle games for iPhone: easy to start, hard to put down, and polished down to the last detail.</p>
+        <div class="ctas rv" style="--d:.15s">
+          <a class="btn primary" href="https://cubeswipe.blubergames.com/" target="_blank" rel="noopener"><span data-i="cta_play">Play Cube Swipe</span>{{ARROW}}</a>
+          <a class="btn soft" href="#games" data-i="cta_games">See our games</a>
+        </div>
+        <ul class="hero-notes rv" style="--d:.2s">
+          <li style="--c: var(--gt2)" data-i="note1">No ads</li>
+          <li style="--c: var(--gl2)" data-i="note2">Plays offline</li>
+          <li style="--c: var(--gr2)" data-i="note3">Made with care</li>
+        </ul>
+      </div>
+
+      <div class="stage rv" style="--d:.1s">
+        <span class="halo" aria-hidden="true"></span>
+        <i class="tile t" aria-hidden="true" style="--s:84px; left:6%; top:12%; --rot:-6deg"></i>
+        <i class="tile r" aria-hidden="true" style="--s:64px; right:8%; top:20%; --dl:-3s; --rot:8deg"></i>
+        <i class="tile l" aria-hidden="true" style="--s:72px; left:10%; bottom:16%; --dl:-5s; --rot:6deg"></i>
+        <i class="tile t" aria-hidden="true" style="--s:52px; right:12%; bottom:10%; --dl:-2s; --rot:-8deg"></i>
+        <div class="iphone">
+          <div class="screen" role="img" aria-label="Cube Swipe gameplay" data-i-aria="ph_aria">
+            <span class="island" aria-hidden="true"></span>
+            <div>
+              <div class="phone-top"><span>Cube Swipe</span><i data-i="ph_target">Target 8</i></div>
+              <div class="phone-stats"><b id="gp-moves">0<small>/8</small></b><span class="gp-bar"><span id="gp-bar"></span></span><b>3×3×3</b></div>
+            </div>
+            <div class="gp-stage">
+              {{GP_SVG}}
+              <div class="gp-solved" id="gp-solved"><b data-i="ph_solved">Solved!</b><span class="gp-stars"><i></i><i></i><i></i></span></div>
+            </div>
+            <div class="phone-bar"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="games" id="games" aria-labelledby="games-title">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow" data-i="games_eyebrow">Our games</p>
+        <h2 id="games-title" data-i="games_title">Small games, lots of calm.</h2>
+        <p data-i="games_sub">Puzzles you can play for a minute or an hour. Our first one is ready.</p>
+      </div>
+
+      <article class="app rv" aria-labelledby="cs-title">
+        <div class="app-head">
+          {{APP_ICON}}
+          <div class="app-title">
+            <h3 id="cs-title">Cube Swipe</h3>
+            <p class="sub" data-i="cs_sub">A relaxing cube puzzle</p>
+          </div>
+          <ul class="chips" aria-label="Details">
+              <li data-i="chip1">Puzzle</li>
+              <li data-i="chip2">Free</li>
+              <li data-i="chip3">iPhone · Web</li>
+              <li data-i="chip4">English · Español</li>
+          </ul>
+          <div class="app-actions">
+            <a class="btn primary" href="https://cubeswipe.blubergames.com/" target="_blank" rel="noopener"><span data-i="play_web">Play on the web</span>{{ARROW}}</a>
+            <span class="store" aria-label="App Store: coming soon">{{APPLE}}<span><small data-i="store_small">Coming soon on the</small><b>App Store</b></span></span>
+          </div>
+        </div>
+
+        <p class="app-desc" data-i="cs_desc">Flat tiles in three colors create the illusion of a cube. Swipe around a point to turn a group of three, and rebuild the cube: yellow on top, red on the left, blue on the right. Easy to learn, and every move changes the whole picture.</p>
+
+        <div class="shots" tabindex="0" aria-label="Screenshots">
+          <img src="assets/cube-swipe/1-home.jpg" width="600" height="1304" loading="lazy" alt="Cube Swipe home screen">
+          <img src="assets/cube-swipe/2-play.jpg" width="600" height="1304" loading="lazy" alt="A shuffled 3×3×3 cube">
+          <img src="assets/cube-swipe/3-hint.jpg" width="600" height="1304" loading="lazy" alt="A hint shows where to swipe">
+          <img src="assets/cube-swipe/4-levels.jpg" width="600" height="1304" loading="lazy" alt="Level map">
+          <img src="assets/cube-swipe/5-play-light.jpg" width="600" height="1304" loading="lazy" alt="Light theme">
+        </div>
+
+        <div class="feats">
+          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="f1_t">50 levels</b><span data-i="f1_d">From 2×2×2 to 4×4×4, each one a little harder.</span></div>
+          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="f2_t">A secret level</b><span data-i="f2_d">An extreme 8×8×8 cube waits at the very end.</span></div>
+          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="f3_t">Hints you keep</b><span data-i="f3_d">Stuck? A hint shows exactly where to swipe, and unused hints are saved.</span></div>
+          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="f4_t">Free play</b><span data-i="f4_d">Easy, Medium or Hard shuffles, whenever you want.</span></div>
+          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="f5_t">Build your own</b><span data-i="f5_d">Paint the tiles and create your own challenge.</span></div>
+          <div class="feat"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="f6_t">Calm by design</b><span data-i="f6_d">Soft sounds, gentle haptics, and light and dark themes.</span></div>
+        </div>
+
+        <p class="credit" data-i="credit">Inspired by the Propp Lozenge, the magnetic puzzle invented by James Propp and designed by Oskar van Deventer.</p>
+      </article>
+
+      <div class="next rv">
+        <span class="q" aria-hidden="true">2</span>
+        <div><b data-i="next_t">Game #2 is in the works</b><span data-i="next_d">Another calm little puzzle. We'll share it here as soon as it's ready.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="studio" id="studio" aria-labelledby="studio-title">
+    <div class="wrap">
+      <div class="floe rv" aria-hidden="true">
+        <span class="flake f1"></span><span class="flake f2"></span><span class="flake f3"></span><span class="flake f4"></span>
+        <svg class="bear-mark" viewBox="{{BEAR_VB}}" aria-hidden="true">{{BEAR}}</svg>
+      </div>
+      <div class="copy">
+        <p class="eyebrow rv" data-i="studio_eyebrow">Our studio</p>
+        <h2 id="studio-title" class="rv" data-i="studio_title">A small studio with a polar bear</h2>
+        <p class="rv" data-i="studio_p1">BluBer Games is an independent studio that makes games for iOS. We like games that respect your time: you can play for a minute, and they still make you think.</p>
+        <p class="rv" data-i="studio_p2">We care about the small things: smooth animations, calm sounds, and controls that feel natural under your finger.</p>
+        <div class="values">
+          <div class="value rv"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="v1_t">Made for touch</b><span data-i="v1_d">Designed for iPhone first, with gestures that feel natural.</span></div>
+          <div class="value rv" style="--d:.08s"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="v2_t">Easy to learn</b><span data-i="v2_d">Clear rules, with the depth that keeps you playing.</span></div>
+          <div class="value rv" style="--d:.16s"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="v3_t">Built with care</b><span data-i="v3_d">Every animation and sound is tuned by hand.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <svg class="logo-full" viewBox="{{LOGO_VB}}" role="img" aria-label="BluBer Games">{{LOGO}}</svg>
+    <nav aria-label="Footer">
+      <a href="#games" data-i="nav_games">Games</a>
+      <a href="#studio" data-i="nav_studio">Studio</a>
+      <a href="https://cubeswipe.blubergames.com/" target="_blank" rel="noopener">Cube Swipe</a>
+      <a href="/support/" data-i="nav_support">Support</a>
+      <a href="/privacy/" data-i="nav_privacy">Privacy</a>
+    </nav>
+    <div class="legal"><span>© <span id="year">2026</span> BluBer Games</span><span data-i="made">Made with calm, for iOS.</span></div>
+  </div>
+</footer>
+
+{{GP_SCRIPT}}
+<script>
+(() => {
+  const ES = {
+    nav_games: "Juegos", nav_studio: "Estudio", nav_support: "Soporte", nav_privacy: "Privacidad",
+    eyebrow: "Estudio independiente de juegos para iOS",
+    h1: "Juegos tranquilos,<br>hechos para <em>iOS</em>.",
+    lead: "Creamos juegos de rompecabezas relajantes para iPhone: fáciles de empezar, difíciles de soltar y cuidados hasta el último detalle.",
+    cta_play: "Jugar Cube Swipe", cta_games: "Ver nuestros juegos",
+    note1: "Sin anuncios", note2: "Funciona sin internet", note3: "Hechos con cuidado",
+    ph_target: "Meta 8", ph_solved: "¡Resuelto!",
+    games_eyebrow: "Nuestros juegos", games_title: "Juegos pequeños, mucha calma.",
+    games_sub: "Rompecabezas para jugar un minuto o una hora. El primero ya está listo.",
+    cs_sub: "Un puzzle de cubo relajante",
+    chip1: "Rompecabezas", chip2: "Gratis", chip3: "iPhone · Web", chip4: "English · Español",
+    play_web: "Jugar en la web", store_small: "Muy pronto en la",
+    cs_desc: "Rombos planos de tres colores forman la ilusión de un cubo. Desliza alrededor de un punto para girar un grupo de tres y vuelve a armar el cubo: amarillo arriba, rojo a la izquierda y azul a la derecha. Se aprende en segundos, y cada movimiento cambia todo el dibujo.",
+    f1_t: "50 niveles", f1_d: "De 2×2×2 a 4×4×4, cada uno un poco más difícil.",
+    f2_t: "Un nivel secreto", f2_d: "Un cubo extremo de 8×8×8 te espera al final.",
+    f3_t: "Pistas que se guardan", f3_d: "¿Te atoraste? Una pista te muestra dónde deslizar, y las que no uses se guardan.",
+    f4_t: "Juego libre", f4_d: "Mezclas en Fácil, Intermedio o Difícil, cuando quieras.",
+    f5_t: "Arma tu mezcla", f5_d: "Pinta los rombos y crea tu propio reto.",
+    f6_t: "Tranquilo por diseño", f6_d: "Sonidos suaves, vibración ligera y tema claro y oscuro.",
+    credit: "Inspirado en el Propp Lozenge, el puzzle magnético inventado por James Propp y diseñado por Oskar van Deventer.",
+    next_t: "El juego #2 ya está en camino", next_d: "Otro pequeño rompecabezas tranquilo. Lo compartiremos aquí en cuanto esté listo.",
+    studio_eyebrow: "Nuestro estudio", studio_title: "Un estudio pequeño con un oso polar",
+    studio_p1: "BluBer Games es un estudio independiente que crea juegos para iOS. Nos gustan los juegos que respetan tu tiempo: puedes jugar un minuto y aun así te hacen pensar.",
+    studio_p2: "Cuidamos los detalles: animaciones fluidas, sonidos tranquilos y controles que se sienten naturales bajo el dedo.",
+    v1_t: "Hechos para tocar", v1_d: "Diseñados primero para iPhone, con gestos que se sienten naturales.",
+    v2_t: "Fáciles de aprender", v2_d: "Reglas claras, con la profundidad que te hace seguir jugando.",
+    v3_t: "Hechos con cuidado", v3_d: "Cada animación y cada sonido están ajustados a mano.",
+    made: "Hecho con calma, para iOS.",
+  };
+  const nodes = [...document.querySelectorAll("[data-i]")];
+  const EN = Object.fromEntries(nodes.map((n) => [n.dataset.i, n.innerHTML]));
+  let lang = "en";
+  try { lang = localStorage.getItem("bluber-lang") || ((navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en"); } catch (e) {}
+  const btn = document.getElementById("lang");
+  function apply() {
+    const dict = lang === "es" ? ES : EN;
+    nodes.forEach((n) => { if (dict[n.dataset.i] !== undefined) n.innerHTML = dict[n.dataset.i]; });
+    const ph = document.querySelector("[data-i-aria]");
+    if (ph) ph.setAttribute("aria-label", lang === "es" ? "Partida de Cube Swipe" : "Cube Swipe gameplay");
+    document.documentElement.lang = lang;
+    btn.textContent = lang === "es" ? "EN" : "ES";
+    btn.setAttribute("aria-label", lang === "es" ? "English" : "Español");
+  }
+  btn.addEventListener("click", () => { lang = lang === "es" ? "en" : "es"; try { localStorage.setItem("bluber-lang", lang); } catch (e) {} apply(); });
+  apply();
+  document.getElementById("year").textContent = new Date().getFullYear();
+  const top = document.getElementById("top");
+  const onScroll = () => top.classList.toggle("scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  // Aparecer suave al bajar
+  const rv = document.querySelectorAll(".rv");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { rv.forEach((n) => n.classList.add("in")); return; }
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  rv.forEach((n) => io.observe(n));
+})();
+</script>
+</body>
+</html>

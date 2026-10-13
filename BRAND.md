@@ -6,7 +6,7 @@ Si estás empezando un juego nuevo en otro chat, pídele que lea este archivo pr
 
 ## Qué es BluBer Games
 
-- Es un estudio independiente que **crea juegos para iOS** (iPhone y iPad).
+- Es un estudio independiente que **crea juegos para iOS** (iPhone). Los juegos también se pueden jugar en la web.
 - Hace juegos de rompecabezas fáciles de empezar, difíciles de soltar y cuidados hasta el último detalle.
 - El primer juego es **Cube Swipe** (inspirado en el puzzle Propp Lozenge). App de iOS: `com.blubergames.cubeswipe`.
   - Juego: <https://cubeswipe.blubergames.com/>

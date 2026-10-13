@@ -2,13 +2,17 @@
 
 Esta es la landing page de **BluBer Games**, un estudio que crea juegos para iOS.
 
-Es un solo archivo, `index.html`. Trae dentro los logos, el ícono y el gameplay animado, y solo carga las fuentes de Google Fonts.
+La página publicada es `index.html`. **No se edita a mano:** se genera con `python3 src/build.py` a partir de `src/index.template.html`. El script le inserta los logos oficiales de `brand/`, el favicon y las piezas del gameplay de `src/parts/`. Solo carga las fuentes de Google Fonts y las capturas de `assets/`.
 
 ## Contenido del repositorio
 
 | Ruta | Qué es |
 |---|---|
-| `index.html` | La página completa, lista para publicar en blubergames.com |
+| `index.html` | La página publicada (generada con `src/build.py`) |
+| `src/` | Plantilla de la página, piezas del gameplay y el script que arma `index.html` |
+| `assets/cube-swipe/` | Capturas del juego que se ven en la página |
+| `privacy/`, `support/` | Política de privacidad y página de soporte (con formulario de Netlify) |
+| `social/instagram/` | Foto de perfil, publicaciones, bio y textos de Instagram |
 | `BRAND.md` | Guía de marca: colores, tipografía, logo, tono y cómo se sienten los juegos |
 | `brand/` | Logos en SVG (fondo blanco, fondo oscuro y solo el oso), el archivo original de Illustrator y la intro animada |
 
