@@ -107,9 +107,12 @@ La versión que usa Propp Lozenge está dentro de su `index.html`, en `#studio` 
 
 ## Notas técnicas para web apps en iPhone
 
-- **Color de la barra:** Safari pinta su barra con el color de las capas **fijas** pegadas arriba y con el fondo de `<html>`.
-  - No uses capas fijas blancas a pantalla completa en apps oscuras.
+- **Color de las barras (comprobado en el simulador, Safari de iOS 26):**
+  - Safari pinta sus barras de arriba y de abajo con las capas **fijas** (`position: fixed`) que tocan los bordes. Si no hay ninguna, usa el fondo de `<html>`/`<body>`.
+  - **Solo vuelve a revisar cuando cambia el fondo de `<html>`/`<body>`.** No lo hace cuando cambia el color de una capa fija, cuando aparece una capa nueva ni cuando se quita una.
   - Ponle a `html` el color de fondo del tema desde el `<head>`.
+  - Para que una pantalla (como la intro blanca) pinte las barras: esconde las capas fijas (`visibility: hidden` basta) y cambia el fondo de `<html>` **y** de `<body>` a ese color. Al terminar, regresa todo.
+  - No uses capas fijas blancas desde la carga en apps oscuras: la barra se queda blanca.
 - **Barra de estado:** en `apple-mobile-web-app-status-bar-style`, usa `black-translucent` en modo oscuro y deja espacio con `env(safe-area-inset-top)`.
 - **Alto de pantalla:** usa `100dvh` para lo que deba ocupar exactamente la pantalla visible.
 - **Sonido en iPhone:** el audio solo arranca después de un toque. Para que suene aunque el teléfono esté en silencio, reproduce un audio mudo al primer toque.
