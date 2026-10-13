@@ -24,8 +24,6 @@
   /* ---------- Foto de perfil: solo el oso ---------- */
   #profile { background: radial-gradient(circle at 50% 45%, #FFFFFF 0 46%, var(--frost) 72%); display: grid; place-items: center; }
   #profile img { width: 600px; transform: translate(-6px, 10px); }
-  #profile-navy { background: radial-gradient(circle at 50% 42%, #0B4A73 0, var(--navy) 62%); display: grid; place-items: center; }
-  #profile-navy img { width: 600px; transform: translate(-6px, 10px); }
 
   /* ---------- Post 1: hola, somos BluBer Games ---------- */
   #p1 { background: #FFFFFF; display: grid; place-items: center; text-align: center; }
@@ -54,9 +52,10 @@
   #p2 .sub { font: 700 38px/1.3 "Nunito", sans-serif; color: var(--soft); margin-top: 60px; }
   #p2 .badge { margin-top: 36px; display: inline-flex; align-items: center; gap: 14px; padding: 18px 34px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.18); font: 700 28px "Montserrat", sans-serif; letter-spacing: 0.02em; color: var(--text); }
   .badge svg { width: 30px; height: 30px; }
-  /* Logo oficial para fondo oscuro, sin modificar (mínimo 120 px de ancho según la guía de marca) */
+  /* Logo oficial sin modificar sobre una tarjeta blanca (no hay versión oficial para fondo oscuro) */
   .by { position: absolute; left: 0; right: 0; bottom: 34px; display: flex; justify-content: center; }
-  .by img { width: 170px; }
+  .by span { display: block; background: #FFFFFF; border-radius: 26px; padding: 12px 20px; box-shadow: 0 10px 30px rgba(3, 6, 12, 0.35); }
+  .by img { display: block; width: 150px; }
 
   /* ---------- Post 3: cómo se juega ---------- */
   #p3 .copy { position: absolute; top: 96px; left: 0; right: 0; text-align: center; display: grid; gap: 22px; justify-items: center; }
@@ -73,7 +72,6 @@
 <body>
 
 <section id="profile" class="sq"><img src="img/bluber-bear.svg" alt=""></section>
-<section id="profile-navy" class="sq"><img src="img/bluber-bear.svg" alt=""></section>
 
 <section id="p1" class="post">
   <div class="ice"></div>
@@ -103,7 +101,7 @@
     <div class="sub">A relaxing cube puzzle</div>
     <div class="badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.75-.78-2.88-.76-1.48.02-2.85.86-3.61 2.19-1.54 2.67-.39 6.62 1.11 8.79.73 1.06 1.6 2.25 2.75 2.2 1.1-.04 1.52-.71 2.85-.71 1.33 0 1.7.71 2.87.69 1.19-.02 1.94-1.08 2.66-2.14.84-1.23 1.19-2.42 1.21-2.48-.03-.01-2.32-.89-2.33-3.54ZM14.2 6.13c.61-.74 1.02-1.76.91-2.78-.88.04-1.94.59-2.57 1.32-.56.65-1.06 1.69-.93 2.69.98.08 1.98-.5 2.59-1.23Z"/></svg>Coming soon to the App Store</div>
   </div>
-  <div class="by"><img src="img/bluber-logo-dark-bg.svg" alt="BluBer Games"></div>
+  <div class="by"><span><img src="img/bluber-logo.svg" alt="BluBer Games"></span></div>
 </section>
 
 <section id="p3" class="post night">
@@ -120,7 +118,7 @@
   <div class="phone"><img src="img/play-hint.png" alt=""></div>
   <div class="fade"></div>
   <div class="chips"><span class="chip"><i>★</i>50 levels</span><span class="chip"><i>♪</i>Relaxing sounds</span><span class="chip"><i>✓</i>No ads</span></div>
-  <div class="by"><img src="img/bluber-logo-dark-bg.svg" alt="BluBer Games"></div>
+  <div class="by"><span><img src="img/bluber-logo.svg" alt="BluBer Games"></span></div>
 </section>
 
 </body>

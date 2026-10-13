@@ -7,7 +7,6 @@ Todo va en inglés.
 | Archivo | Uso | Tamaño |
 |---|---|---|
 | `profile-bear.png` | Foto de perfil (oso sobre blanco) | 2160 × 2160 |
-| `profile-bear-navy.png` | Foto de perfil alternativa (oso sobre azul marino) | 2160 × 2160 |
 | `post-1-hello.png` | Publicación 1: presentación del estudio | 2160 × 2700 (4:5) |
 | `post-2-cube-swipe.png` | Publicación 2: Cube Swipe, nuestro primer juego | 2160 × 2700 (4:5) |
 | `post-3-how-to-play.png` | Publicación 3: cómo se juega | 2160 × 2700 (4:5) |

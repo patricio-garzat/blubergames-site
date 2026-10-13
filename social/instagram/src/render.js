@@ -14,7 +14,7 @@ const path = require("path");
   await page.goto("file://" + path.join(__dirname, "designs.html"), { waitUntil: "networkidle0" });
   await page.evaluate(() => document.fonts.ready);
   await new Promise((r) => setTimeout(r, 500));
-  const names = { profile: "profile-bear", "profile-navy": "profile-bear-navy", p1: "post-1-hello", p2: "post-2-cube-swipe", p3: "post-3-how-to-play" };
+  const names = { profile: "profile-bear", p1: "post-1-hello", p2: "post-2-cube-swipe", p3: "post-3-how-to-play" };
   for (const [id, name] of Object.entries(names)) {
     const el = await page.$("#" + id);
     await el.screenshot({ path: path.join(__dirname, "..", name + ".png") });

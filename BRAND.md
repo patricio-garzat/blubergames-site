@@ -17,15 +17,24 @@ Si estás empezando un juego nuevo en otro chat, pídele que lea este archivo pr
 
 | Archivo | Uso |
 |---|---|
-| `brand/bluber-logo.svg` | Logo principal: oso más "BluBer GAMES", **sobre fondo blanco**. Es la versión por defecto. |
-| `brand/bluber-logo-dark-bg.svg` | Versión para fondo azul marino o fondos oscuros, con el texto en azules claros. |
-| `brand/bluber-bear.svg` | Solo el oso. Para íconos pequeños, favicon y encabezados. |
-| `brand/source/BluBer Games.svg` | Archivo original de Illustrator, con todas las versiones. |
+| `brand/bluber-logo.svg` | Logo oficial: oso más "BluBer GAMES", **sobre fondo blanco**. |
+| `brand/bluber-bear.svg` | Solo el oso. Para la foto de perfil, íconos pequeños, el favicon y encabezados. |
+| `brand/source/BluBer Games.ai` | Archivo original de Illustrator del logo oficial (13 oct 2026). |
+
+Los dos SVG salen directo del archivo de Illustrator, con las mismas formas y colores. Comparados píxel por píxel, solo difieren en el suavizado de las orillas. **Nunca se redibuja ni se recorta el logo**: si hace falta otro tamaño u otro encuadre, se cambia solo el margen alrededor.
+
+Colores del logo (los del archivo oficial):
+
+| Parte | Hex |
+|---|---|
+| Cuerpo del oso | `#8AC7ED` |
+| Sombra del oso y "GAMES" | `#57ADE1` |
+| "BluBer", ojo y nariz | `#093A5B` |
 
 Reglas:
 
-- **Fondo:** el logo vive sobre blanco. Sobre fondos oscuros, usa la versión `dark-bg`.
-- **Forma:** no lo deformes, no lo rotes y no le cambies los colores.
+- **Fondo:** el logo vive sobre blanco. Todavía no hay versión oficial para fondo oscuro. Sobre fondos oscuros, ponlo dentro de una tarjeta blanca; no le cambies los colores.
+- **Forma:** no lo deformes, no lo rotes, no le cambies los colores y no lo redibujes.
 - **Espacio libre:** deja alrededor al menos el alto de la "B" de "BluBer".
 - **Tamaño mínimo del logo completo:** 120 px de ancho. Por debajo de eso, usa solo el oso.
 - **En la intro de los juegos:** el logo va centrado horizontal y verticalmente, a un tamaño moderado (unos 200 px en celular y 270 px en computadora), nunca gigante.
