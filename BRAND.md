@@ -8,7 +8,7 @@ Si estás empezando un juego nuevo en otro chat, pídele que lea este archivo pr
 
 - Es un estudio independiente que **crea juegos para iOS** (iPhone y iPad).
 - Hace juegos de rompecabezas fáciles de empezar, difíciles de soltar y cuidados hasta el último detalle.
-- El primer juego es **Propp Lozenge**.
+- El primer juego es **Cube Swipe** (inspirado en el puzzle Cube Swipe). App de iOS: `com.blubergames.cubeswipe`.
   - Juego: <https://patricio-garzat.github.io/Puzzle-Propp-Lozenge/>
   - Repositorio: `patricio-garzat/Puzzle-Propp-Lozenge`
 - El dominio de la marca es **blubergames.com**.
@@ -43,7 +43,7 @@ Reglas:
 | Line | `#DCEBF6` | Bordes suaves |
 | Ink 2 | `#3E5F78` | Texto secundario |
 
-Cada juego puede tener su propia paleta. Propp Lozenge, por ejemplo, usa amarillo, rojo y azul en los rombos y un fondo nocturno `#12102A`. Lo que siempre es de BluBer es la intro y la landing.
+Cada juego puede tener su propia paleta. Cube Swipe, por ejemplo, usa amarillo, rojo y azul en los rombos y un fondo nocturno `#1C2535`. Lo que siempre es de BluBer es la intro y la landing.
 
 ## Tipografía
 
@@ -56,11 +56,11 @@ Cada juego puede tener su propia paleta. Propp Lozenge, por ejemplo, usa amarill
 
 - **Idioma:** inglés por defecto, con español como opción. Los juegos tienen un ajuste de idioma, y la landing tiene un botón ES/EN.
 - **Estilo:** frases cortas, claras y cálidas. Hablarle al jugador de "tú", sin tecnicismos.
-- **Terminología de Propp Lozenge en inglés:** tiles, Target, Hint, Shuffle, Free play, Build your own, clockwise / counterclockwise.
+- **Terminología de Cube Swipe en inglés:** tiles, Target, Hint, Shuffle, Free play, Build your own, clockwise / counterclockwise.
 
 ## Cómo se sienten los juegos (preferencias aprendidas)
 
-Esto salió de construir Propp Lozenge. Úsalo como punto de partida en cada juego nuevo.
+Esto salió de construir Cube Swipe. Úsalo como punto de partida en cada juego nuevo.
 
 **Animaciones**
 - Fluidas, suaves y profesionales.
@@ -103,7 +103,7 @@ Está en `brand/intro/bluber-intro.html`, con controles para repetirla y verla e
 | 1.95 s | "GAMES" se abre desde el centro |
 | 2.7 s | Un brillo recorre "BluBer" y el oso levanta la cabeza y parpadea |
 
-La versión que usa Propp Lozenge está dentro de su `index.html`, en `#studio` y `playStudio()`.
+La versión que usa Cube Swipe está dentro de su `index.html`, en `#studio` y `playStudio()`.
 
 ## Notas técnicas para web apps en iPhone
 

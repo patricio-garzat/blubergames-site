@@ -23,7 +23,7 @@ La página está en inglés y español. El idioma se elige según el navegador y
 
 ## Cómo agregar un juego nuevo
 
-1. Copia el bloque `<article class="game">` de Propp Lozenge y pégalo debajo.
+1. Copia el bloque `<article class="game">` de Cube Swipe y pégalo debajo.
 2. Cambia el nombre, el ícono, la descripción, las características (`.features`), los datos (`.facts`) y el link de "Play now".
 3. Agrega las traducciones al español en el objeto `ES`.
 4. Actualiza o quita la tarjeta "Game #2 is in the works" (`.next`).
@@ -45,4 +45,4 @@ Si el juego no tiene gameplay animado, puede llevar un tablero quieto o una capt
 
 | Juego | Estado | Links |
 |---|---|---|
-| Propp Lozenge | Disponible en web; App Store pronto | [Jugar](https://patricio-garzat.github.io/Puzzle-Propp-Lozenge/) · [Código](https://github.com/patricio-garzat/Puzzle-Propp-Lozenge) |
+| Cube Swipe | Disponible en web; App Store pronto | [Jugar](https://patricio-garzat.github.io/Puzzle-Propp-Lozenge/) · [Código](https://github.com/patricio-garzat/Puzzle-Propp-Lozenge) |
