@@ -8,7 +8,8 @@ Si estás empezando un juego nuevo en otro chat, pídele que lea este archivo pr
 
 - Es un estudio independiente que **crea juegos para iOS** (iPhone). Los juegos también se pueden jugar en la web.
 - Hace juegos de rompecabezas fáciles de empezar, difíciles de soltar y cuidados hasta el último detalle.
-- El primer juego es **Cube Swipe** (inspirado en el puzzle Propp Lozenge). App de iOS: `com.blubergames.cubeswipe`.
+- El primer juego es **Cube Swipe** (inspirado en el puzzle Propp Lozenge). Está en el App Store desde el 14 de octubre de 2026: https://apps.apple.com/app/id6822390183 (`com.blubergames.cubeswipe`).
+- Para enlazar al App Store usa siempre el badge oficial de Apple, sin modificar: `assets/badges/` en inglés y español.
   - Juego: <https://cubeswipe.blubergames.com/>
   - Repositorio: `patricio-garzat/Puzzle-Propp-Lozenge`
 - El dominio de la marca es **blubergames.com**.

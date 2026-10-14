@@ -66,6 +66,15 @@
   @keyframes shine { 0%, 70% { left: -60%; } 100% { left: 130%; } }
   .btn.soft { background: var(--frost); color: var(--navy); border: 1px solid var(--line); }
   .btn.soft:hover { background: var(--mist); }
+  /* Badge oficial de Apple (sin modificar; se muestra el del idioma de la página) */
+  .badge-store { display: inline-flex; align-items: center; line-height: 0; border-radius: 12px; transition: transform .25s var(--ease), box-shadow .25s; }
+  .badge-store:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0, 56, 91, 0.18); }
+  .badge-store img { height: 54px; width: auto; display: block; }
+  .ctas .badge-store { justify-content: center; }
+  .badge-store .b-es, html[lang="es"] .badge-store .b-en { display: none; }
+  html[lang="es"] .badge-store .b-es { display: block; }
+  .new-pill { display: inline-flex; align-items: center; gap: 8px; font: 700 12px var(--f-display); letter-spacing: .12em; text-transform: uppercase; color: #FFFFFF; background: linear-gradient(135deg, var(--sea), #2F8FD0); padding: 6px 12px 6px 10px; border-radius: 999px; text-decoration: none; box-shadow: 0 6px 16px rgba(80, 175, 234, 0.3); }
+  .new-pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #FFFFFF; animation: breathe 2.4s ease-in-out infinite; }
   .store { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px 10px 14px; border-radius: 14px; background: var(--navy); color: #FFFFFF; text-decoration: none; opacity: .92; }
   .store svg { width: 24px; height: 24px; }
   .store small { display: block; font: 600 10.5px/1.1 var(--f-body); letter-spacing: 0.02em; opacity: .75; }
@@ -146,6 +155,8 @@
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding: 0; list-style: none; }
   .chips li { font-size: 13px; font-weight: 600; color: var(--ink-2); background: var(--frost); border: 1px solid var(--line); padding: 5px 12px; border-radius: 999px; }
   .app-actions { display: grid; gap: 10px; justify-items: stretch; min-width: 230px; }
+  .app-actions .badge-store { justify-content: center; }
+  .app-actions .badge-store img { height: 58px; }
   .app-desc { margin-top: 30px; color: var(--ink-2); font-size: 18px; max-width: 46em; }
 
   .shots { display: flex; gap: 18px; margin: 34px -40px 0; padding: 6px 40px 22px; scroll-padding-inline: 40px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
@@ -277,12 +288,13 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
       <div>
-        <p class="eyebrow rv" data-i="eyebrow">Independent iOS game studio</p>
+        <p class="rv"><a class="new-pill" href="https://apps.apple.com/app/id6822390183" target="_blank" rel="noopener" data-i="new_pill">Cube Swipe is out now</a></p>
+        <p class="eyebrow rv" style="margin-top:18px" data-i="eyebrow">Independent iOS game studio</p>
         <h1 id="hero-title" class="rv" style="--d:.05s" data-i="h1">Calm games,<br>made for <em>iOS</em>.</h1>
         <p class="lead rv" style="--d:.1s" data-i="lead">We make relaxing puzzle games for iPhone: easy to start, hard to put down, and polished down to the last detail.</p>
         <div class="ctas rv" style="--d:.15s">
-          <a class="btn primary" href="https://cubeswipe.blubergames.com/" target="_blank" rel="noopener"><span data-i="cta_play">Play Cube Swipe</span>{{ARROW}}</a>
-          <a class="btn soft" href="#games" data-i="cta_games">See our games</a>
+          <a class="badge-store hero-badge" href="https://apps.apple.com/app/id6822390183" target="_blank" rel="noopener" aria-label="Download Cube Swipe on the App Store"><img class="b-en" src="assets/badges/app-store-en-us.svg" alt="Download on the App Store" width="150" height="50"><img class="b-es" src="assets/badges/app-store-es-mx.svg" alt="Descárgalo en el App Store" width="150" height="50"></a>
+          <a class="btn soft" href="https://cubeswipe.blubergames.com/" target="_blank" rel="noopener"><span data-i="cta_play">Play on the web</span>{{ARROW}}</a>
         </div>
         <ul class="hero-notes rv" style="--d:.2s">
           <li data-i="note1">No ads</li>
@@ -320,7 +332,7 @@
       <div class="sec-head rv">
         <p class="eyebrow" data-i="games_eyebrow">Our games</p>
         <h2 id="games-title" data-i="games_title">Small games, lots of calm.</h2>
-        <p data-i="games_sub">Puzzles you can play for a minute or an hour. Our first one is ready.</p>
+        <p data-i="games_sub">Puzzles you can play for a minute or an hour. Our first one is out now on the App Store.</p>
       </div>
 
       <article class="app rv" aria-labelledby="cs-title">
@@ -334,11 +346,12 @@
               <li class="rv" data-i="chip1">Puzzle</li>
               <li class="rv" data-i="chip2">Free</li>
               <li class="rv" data-i="chip3">iPhone · Web</li>
+              <li class="rv" data-i="chip5">4+</li>
               <li class="rv" data-i="chip4">English · Español</li>
           </ul>
           <div class="app-actions">
-            <a class="btn primary" href="https://cubeswipe.blubergames.com/" target="_blank" rel="noopener"><span data-i="play_web">Play on the web</span>{{ARROW}}</a>
-            <span class="store" aria-label="App Store: coming soon">{{APPLE}}<span><small data-i="store_small">Coming soon on the</small><b>App Store</b></span></span>
+            <a class="badge-store card-badge" href="https://apps.apple.com/app/id6822390183" target="_blank" rel="noopener" aria-label="Download Cube Swipe on the App Store"><img class="b-en" src="assets/badges/app-store-en-us.svg" alt="Download on the App Store" width="150" height="50"><img class="b-es" src="assets/badges/app-store-es-mx.svg" alt="Descárgalo en el App Store" width="150" height="50"></a>
+            <a class="btn soft" href="https://cubeswipe.blubergames.com/" target="_blank" rel="noopener"><span data-i="play_web">Play on the web</span>{{ARROW}}</a>
           </div>
         </div>
 
@@ -420,7 +433,7 @@
     <nav aria-label="Footer">
       <a href="#games" data-i="nav_games">Games</a>
       <a href="#studio" data-i="nav_studio">Studio</a>
-      <a href="https://cubeswipe.blubergames.com/" target="_blank" rel="noopener">Cube Swipe</a>
+      <a href="https://apps.apple.com/app/id6822390183" target="_blank" rel="noopener">Cube Swipe</a>
       <a href="/support/" data-i="nav_support">Support</a>
       <a href="/privacy/" data-i="nav_privacy">Privacy</a>
     </nav>
@@ -436,14 +449,14 @@
     eyebrow: "Estudio independiente de juegos para iOS",
     h1: "Juegos tranquilos,<br>hechos para <em>iOS</em>.",
     lead: "Creamos juegos de rompecabezas relajantes para iPhone: fáciles de empezar, difíciles de soltar y cuidados hasta el último detalle.",
-    cta_play: "Jugar Cube Swipe", cta_games: "Ver nuestros juegos",
+    cta_play: "Jugar en la web", cta_games: "Ver nuestros juegos", new_pill: "Cube Swipe ya está disponible",
     note1: "Sin anuncios", note2: "Funciona sin internet", note3: "Hechos con cuidado",
     ph_target: "Meta 8", ph_solved: "¡Resuelto!",
     games_eyebrow: "Nuestros juegos", games_title: "Juegos pequeños, mucha calma.",
-    games_sub: "Rompecabezas para jugar un minuto o una hora. El primero ya está listo.",
+    games_sub: "Rompecabezas para jugar un minuto o una hora. El primero ya está en el App Store.",
     cs_sub: "Un puzzle de cubo relajante",
     chip1: "Rompecabezas", chip2: "Gratis", chip3: "iPhone · Web", chip4: "English · Español",
-    play_web: "Jugar en la web", store_small: "Muy pronto en la",
+    play_web: "Jugar en la web",
     cs_desc: "Rombos planos de tres colores forman la ilusión de un cubo. Desliza alrededor de un punto para girar un grupo de tres y vuelve a armar el cubo: amarillo arriba, rojo a la izquierda y azul a la derecha. Se aprende en segundos, y cada movimiento cambia todo el dibujo.",
     f1_t: "50 niveles", f1_d: "De 2×2×2 a 4×4×4, cada uno un poco más difícil.",
     f2_t: "Un nivel secreto", f2_d: "Un cubo extremo de 8×8×8 te espera al final.",
