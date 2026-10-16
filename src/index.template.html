@@ -145,25 +145,26 @@
   .games { background: linear-gradient(180deg, var(--paper) 0, var(--frost) 120px, var(--frost) calc(100% - 120px), var(--paper) 100%); }
 
   /* Ficha del juego (como una página de la App Store) */
-  .app { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 40px; }
-  .app-head { display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "icon title actions" "icon chips actions"; column-gap: 24px; row-gap: 12px; align-items: center; }
-  .app-head .app-icon-box { grid-area: icon; }
-  .app-title { grid-area: title; align-self: end; }
-  .app-head .chips { grid-area: chips; align-self: start; margin-top: 0; }
-  .app-actions { grid-area: actions; }
   /* La sombra va en un contenedor con las mismas esquinas que el ícono (rx 115.2/512 = 22.5%):
      Safari dibuja cuadrada la sombra de un <svg> aunque tenga border-radius */
   .app-icon-box { display: block; width: 112px; height: 112px; border-radius: 22.5%; box-shadow: 0 12px 26px rgba(18, 25, 39, 0.22), 0 2px 6px rgba(18, 25, 39, 0.10); animation: icon 6s ease-in-out infinite; }
   .app-icon { display: block; width: 100%; height: 100%; }
   @keyframes icon { 50% { transform: translateY(-4px) rotate(-1.5deg); } }
-  .app-head h3 { font-size: clamp(30px, 3.4vw, 40px); font-weight: 800; }
-  .app-head .sub { color: var(--ink-2); font-weight: 500; font-size: 18px; margin-top: 4px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding: 0; list-style: none; }
-  .chips li { font-size: 13px; font-weight: 600; color: var(--ink-2); background: var(--frost); border: 1px solid var(--line); padding: 5px 12px; border-radius: 999px; }
-  .app-actions { display: grid; gap: 10px; justify-items: stretch; min-width: 230px; }
-  .app-actions .badge-store { justify-content: center; }
-  .app-actions .badge-store img { height: 58px; }
-  .app-desc { margin-top: 30px; color: var(--ink-2); font-size: 18px; max-width: 46em; }
+  /* Sobre el juego: desplegable (la altura se abre con grid-template-rows 0fr -> 1fr) */
+  .about { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); overflow: hidden; scroll-margin-top: 90px; }
+  .about-toggle { display: flex; align-items: center; justify-content: space-between; gap: 18px; width: 100%; padding: 24px 30px; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; border-radius: inherit; transition: background .25s; }
+  .about-toggle:hover { background: var(--frost); }
+  .about-text b { display: block; font: 800 20px var(--f-display); letter-spacing: -0.02em; }
+  .about-text span { display: block; margin-top: 2px; color: var(--ink-2); font-size: 15.5px; }
+  .chev { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--frost); border: 1px solid var(--line); color: var(--navy); transition: transform .5s var(--ease), background .25s; }
+  .chev svg { width: 20px; height: 20px; }
+  .about.open .chev { transform: rotate(180deg); background: var(--mist); }
+  .about-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .6s var(--ease); }
+  .about.open .about-panel { grid-template-rows: 1fr; }
+  .about-inner { min-height: 0; overflow: hidden; padding: 0 40px; opacity: 0; transition: opacity .45s var(--ease), padding .6s var(--ease); }
+  .about.open .about-inner { padding-block: 6px 36px; opacity: 1; border-top: 1px solid var(--line); }
+  .about-h { margin: 28px 0 0; font: 700 12.5px var(--f-display); letter-spacing: 0.18em; text-transform: uppercase; color: var(--sea); }
+  .app-desc { margin-top: 12px; color: var(--ink-2); font-size: 18px; max-width: 46em; }
 
   .shots { display: flex; gap: 18px; margin: 34px -40px 0; padding: 6px 40px 22px; scroll-padding-inline: 40px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .shots::-webkit-scrollbar { display: none; }
@@ -283,10 +284,7 @@
     .hero .lead { margin-inline: auto; }
     .ctas, .hero-notes { justify-content: center; }
     .stage { min-height: 500px; }
-    .app { padding: 30px; }
-    .app-head { grid-template-columns: auto 1fr; grid-template-areas: "icon title" "icon chips" "actions actions"; }
-    .app-actions { grid-template-columns: 1fr 1fr; min-width: 0; margin-top: 10px; }
-    .shots { margin-inline: -30px; padding-inline: 30px; scroll-padding-inline: 30px; }
+    .shots { margin-inline: -40px; padding-inline: 40px; scroll-padding-inline: 40px; }
     .feats { grid-template-columns: 1fr 1fr; }
     .scene { max-width: 400px; }
     .arcade { grid-template-columns: 1fr 1fr; }
@@ -302,14 +300,12 @@
     .iphone { width: 260px; border-radius: 46px; }
     .screen { border-radius: 36px; padding-top: 46px; }
     .ctas { flex-direction: column; align-items: stretch; }
-    .app { padding: 22px; border-radius: 26px; }
-    .app-head { column-gap: 16px; grid-template-areas: "icon title" "chips chips" "actions actions"; }
-    .app-title { align-self: center; }
-    .app-head h3 { font-size: 28px; }
-    .app-head .sub { font-size: 16px; }
-    .app-icon-box { width: 84px; height: 84px; }
-    .app-actions { grid-template-columns: 1fr; }
-    .shots { margin-inline: -22px; padding-inline: 22px; scroll-padding-inline: 22px; gap: 14px; }
+    .about-toggle { padding: 18px 20px; }
+    .about-text b { font-size: 18px; }
+    .about-text span { font-size: 14.5px; }
+    .about-inner { padding-inline: 20px; }
+    .app-desc { font-size: 16.5px; }
+    .shots { margin-inline: -20px; padding-inline: 20px; scroll-padding-inline: 20px; gap: 14px; }
     .shots img { width: 190px; border-radius: 26px; }
     .feats, .values { grid-template-columns: 1fr; }
     footer .wrap { grid-template-columns: 1fr; }
@@ -337,7 +333,8 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .player, .pl-stage iframe { transition: none; transform: none; }
+    .player, .pl-stage iframe, .about-panel, .about-inner, .chev { transition: none; transform: none; }
+    .about.open .chev { transform: rotate(180deg); }
     .iphone, .stage .tile, .scene *, .hero::before, .hero::after, .app-icon-box, .q, .pl-load .pl-icon { animation: none !important; }
     .scene .snow { display: none; }
     .btn.primary::after { display: none; }
@@ -430,7 +427,7 @@
             <p class="gc-meta" data-i="gc_meta">Puzzle · Free · iPhone · Web</p>
             <div class="gc-actions">
               <a class="btn primary sm" href="https://cubeswipe.blubergames.com/" data-play="cube-swipe">{{PLAY}}<span data-i="play">Play</span></a>
-              <a class="btn soft sm" href="#cube-swipe" data-i="details">Details</a>
+              <a class="btn soft sm" href="#cube-swipe" data-about data-i="howto">How to play</a>
             </div>
           </div>
         </article>
@@ -450,47 +447,36 @@
         </article>
       </div>
 
-      <article class="app rv" id="cube-swipe" aria-labelledby="cs-title">
-        <div class="app-head">
-          <span class="app-icon-box">{{APP_ICON}}</span>
-          <div class="app-title">
-            <h3 id="cs-title">Cube Swipe</h3>
-            <p class="sub" data-i="cs_sub">A relaxing cube puzzle</p>
+      <!-- Sobre el juego: desplegable (cerrado al cargar) con cómo se juega, capturas y lo que trae -->
+      <div class="about rv" id="cube-swipe">
+        <button class="about-toggle" type="button" id="about-btn" aria-expanded="false" aria-controls="about-cs">
+          <span class="about-text"><b data-i="about_t">About the game</b><span data-i="about_d">How to play, screenshots and everything inside.</span></span>
+          <span class="chev" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5.5 7.75 10 12.25l4.5-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <div class="about-panel" id="about-cs" role="region" aria-labelledby="about-btn">
+          <div class="about-inner" inert>
+            <h4 class="about-h" data-i="howto">How to play</h4>
+            <p class="app-desc" data-i="cs_desc">Flat tiles in three colors create the illusion of a cube. Swipe around a point to turn a group of three, and rebuild the cube: yellow on top, red on the left, blue on the right. Easy to learn, and every move changes the whole picture.</p>
+            <div class="shots" tabindex="0" aria-label="Screenshots" data-stagger>
+              <img class="rv" src="assets/cube-swipe/1-home.jpg" width="600" height="1304" loading="lazy" alt="Cube Swipe home screen">
+              <img class="rv" src="assets/cube-swipe/2-play.jpg" width="600" height="1304" loading="lazy" alt="A shuffled 3×3×3 cube">
+              <img class="rv" src="assets/cube-swipe/3-hint.jpg" width="600" height="1304" loading="lazy" alt="A hint shows where to swipe">
+              <img class="rv" src="assets/cube-swipe/4-levels.jpg" width="600" height="1304" loading="lazy" alt="Level map">
+              <img class="rv" src="assets/cube-swipe/5-play-light.jpg" width="600" height="1304" loading="lazy" alt="Light theme">
+            </div>
+            <h4 class="about-h" data-i="inside">What's inside</h4>
+            <div class="feats" data-stagger>
+              <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="f1_t">50 levels</b><span data-i="f1_d">From 2×2×2 to 4×4×4, each one a little harder.</span></div>
+              <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="f2_t">A secret level</b><span data-i="f2_d">An extreme 8×8×8 cube waits at the very end.</span></div>
+              <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="f3_t">Hints you keep</b><span data-i="f3_d">Stuck? A hint shows exactly where to swipe, and unused hints are saved.</span></div>
+              <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="f4_t">Free play</b><span data-i="f4_d">Easy, Medium or Hard shuffles, whenever you want.</span></div>
+              <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="f5_t">Build your own</b><span data-i="f5_d">Paint the tiles and create your own challenge.</span></div>
+              <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="f6_t">Calm by design</b><span data-i="f6_d">Soft sounds, gentle haptics, and light and dark themes.</span></div>
+            </div>
+            <p class="credit" data-i="credit">Inspired by the Propp Lozenge, the magnetic puzzle invented by James Propp and designed by Oskar van Deventer.</p>
           </div>
-          <ul class="chips" aria-label="Details" data-stagger>
-              <li class="rv" data-i="chip1">Puzzle</li>
-              <li class="rv" data-i="chip2">Free</li>
-              <li class="rv" data-i="chip3">iPhone · Web</li>
-              <li class="rv" data-i="chip5">4+</li>
-              <li class="rv" data-i="chip4">English · Español</li>
-          </ul>
-          <div class="app-actions">
-            <a class="badge-store card-badge" href="https://apps.apple.com/app/id6822390183" target="_blank" rel="noopener" aria-label="Download Cube Swipe on the App Store"><img class="b-en" src="assets/badges/app-store-en-us.svg" alt="Download on the App Store" width="150" height="50"><img class="b-es" src="assets/badges/app-store-es-mx.svg" alt="Descárgalo en el App Store" width="150" height="50"></a>
-            <a class="btn soft" href="https://cubeswipe.blubergames.com/" data-play="cube-swipe">{{PLAY}}<span data-i="play_now">Play now</span></a>
-          </div>
         </div>
-
-        <p class="app-desc" data-i="cs_desc">Flat tiles in three colors create the illusion of a cube. Swipe around a point to turn a group of three, and rebuild the cube: yellow on top, red on the left, blue on the right. Easy to learn, and every move changes the whole picture.</p>
-
-        <div class="shots" tabindex="0" aria-label="Screenshots" data-stagger>
-          <img class="rv" src="assets/cube-swipe/1-home.jpg" width="600" height="1304" loading="lazy" alt="Cube Swipe home screen">
-          <img class="rv" src="assets/cube-swipe/2-play.jpg" width="600" height="1304" loading="lazy" alt="A shuffled 3×3×3 cube">
-          <img class="rv" src="assets/cube-swipe/3-hint.jpg" width="600" height="1304" loading="lazy" alt="A hint shows where to swipe">
-          <img class="rv" src="assets/cube-swipe/4-levels.jpg" width="600" height="1304" loading="lazy" alt="Level map">
-          <img class="rv" src="assets/cube-swipe/5-play-light.jpg" width="600" height="1304" loading="lazy" alt="Light theme">
-        </div>
-
-        <div class="feats" data-stagger>
-          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="f1_t">50 levels</b><span data-i="f1_d">From 2×2×2 to 4×4×4, each one a little harder.</span></div>
-          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="f2_t">A secret level</b><span data-i="f2_d">An extreme 8×8×8 cube waits at the very end.</span></div>
-          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="f3_t">Hints you keep</b><span data-i="f3_d">Stuck? A hint shows exactly where to swipe, and unused hints are saved.</span></div>
-          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gl1), var(--gl2))"></i><b data-i="f4_t">Free play</b><span data-i="f4_d">Easy, Medium or Hard shuffles, whenever you want.</span></div>
-          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gr1), var(--gr2))"></i><b data-i="f5_t">Build your own</b><span data-i="f5_d">Paint the tiles and create your own challenge.</span></div>
-          <div class="feat rv"><i style="--c: linear-gradient(160deg, var(--gt1), var(--gt2))"></i><b data-i="f6_t">Calm by design</b><span data-i="f6_d">Soft sounds, gentle haptics, and light and dark themes.</span></div>
-        </div>
-
-        <p class="credit" data-i="credit">Inspired by the Propp Lozenge, the magnetic puzzle invented by James Propp and designed by Oskar van Deventer.</p>
-      </article>
+      </div>
     </div>
   </section>
 
@@ -543,7 +529,6 @@
     <nav aria-label="Footer">
       <a href="#games" data-i="nav_games">Games</a>
       <a href="#studio" data-i="nav_studio">Studio</a>
-      <a href="https://apps.apple.com/app/id6822390183" target="_blank" rel="noopener">Cube Swipe</a>
       <a href="/support/" data-i="nav_support">Support</a>
       <a href="/privacy/" data-i="nav_privacy">Privacy</a>
     </nav>
@@ -581,12 +566,10 @@
     games_eyebrow: "Nuestros juegos", games_title: "Elige un juego y juega.",
     games_sub: "Todos se juegan aquí mismo, en tu navegador. Si te gusta, llévatelo en el App Store.",
     gc_new: "Ya disponible", gc_cs: "Desliza para girar los rombos y vuelve a armar el cubo.",
-    gc_meta: "Rompecabezas · Gratis · iPhone · Web", play: "Jugar", details: "Detalles",
+    gc_meta: "Rompecabezas · Gratis · iPhone · Web", play: "Jugar", howto: "Cómo se juega", inside: "Qué trae",
+    about_t: "Sobre el juego", about_d: "Cómo se juega, capturas y todo lo que trae.",
     s2_t: "Juego #2", s2_tag: "En camino", s2_d: "Otro pequeño rompecabezas tranquilo. Lo compartiremos aquí en cuanto esté listo.",
     s3_t: "Más juegos", s3_tag: "Después", s3_d: "Un rompecabezas tranquilo a la vez. Todos se podrán jugar aquí mismo.",
-    cs_sub: "Un puzzle de cubo relajante",
-    chip1: "Rompecabezas", chip2: "Gratis", chip3: "iPhone · Web", chip4: "English · Español",
-    play_now: "Jugar ahora",
     cs_desc: "Rombos planos de tres colores forman la ilusión de un cubo. Desliza alrededor de un punto para girar un grupo de tres y vuelve a armar el cubo: amarillo arriba, rojo a la izquierda y azul a la derecha. Se aprende en segundos, y cada movimiento cambia todo el dibujo.",
     f1_t: "50 niveles", f1_d: "De 2×2×2 a 4×4×4, cada uno un poco más difícil.",
     f2_t: "Un nivel secreto", f2_d: "Un cubo extremo de 8×8×8 te espera al final.",
@@ -650,6 +633,16 @@
   if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { rv.forEach((n) => n.classList.add("in")); return; }
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
   rv.forEach((n) => io.observe(n));
+})();
+</script>
+<script>
+// Sobre el juego: abre y cierra el desplegable; cerrado, su contenido no recibe foco (inert)
+(() => {
+  const box = document.getElementById("cube-swipe"), btn = document.getElementById("about-btn");
+  const inner = box.querySelector(".about-inner");
+  const set = (open) => { box.classList.toggle("open", open); btn.setAttribute("aria-expanded", open); inner.inert = !open; };
+  btn.addEventListener("click", () => set(!box.classList.contains("open")));
+  document.querySelectorAll("[data-about]").forEach((a) => a.addEventListener("click", () => set(true)));
 })();
 </script>
 <script>
