@@ -682,9 +682,9 @@
 // Sin JavaScript, los botones siguen llevando al juego en su propio subdominio.
 (() => {
   const GAMES = {
-    "cube-swipe": { name: "Cube Swipe", url: "https://cubeswipe.blubergames.com/", store: "https://apps.apple.com/app/id6822390183", light: "#EEF5FB", dark: "#1C2535" },
-    // Beta: todavía sin App Store ni subdominio (cuando exista smush.blubergames.com, cambiar url aquí y en su tarjeta)
-    "smush": { name: "SMUSH!", url: "https://patricio-garzat.github.io/smush/", icon: "assets/smush/icon.svg", beta: true, light: "#F6F5F1", dark: "#191918" },
+    "cube-swipe": { name: "Cube Swipe", url: "/play/cube-swipe/", store: "https://apps.apple.com/app/id6822390183", light: "#EEF5FB", dark: "#1C2535" },
+    // Beta: todavía sin App Store ni subdominio (cuando exista smush.blubergames.com, cambiar el proxy en _redirects)
+    "smush": { name: "SMUSH!", url: "/play/smush/", icon: "assets/smush/icon.svg", beta: true, light: "#F6F5F1", dark: "#191918" },
   };
   const root = document.documentElement, body = document.body;
   const pl = document.getElementById("player"), stage = document.getElementById("pl-stage");
@@ -695,6 +695,23 @@
   const dark = matchMedia("(prefers-color-scheme: dark)");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)");
   let current = null, frame = null, back = null, hideTimer = 0;
+
+  // Sonido desde que abre: los juegos se sirven en este mismo dominio (/play/…, proxy en _redirects) y usan
+  // el audio que se desbloquea aquí con el toque en "Play" (window.bluberAudio). Safari no deja que un
+  // juego en un iframe de otro dominio suene sin que lo toquen a él. "playback": se oye aunque el iPhone
+  // esté en modo silencio (lo pidió el usuario). Al cerrar se cierra ese audio y todo se calla.
+  const SILENT = "data:audio/wav;base64,UklGRrQBAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YZABAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA";
+  function audio(gesture) {
+    if (gesture) {
+      try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch (e) {}
+      try { const a = new Audio(SILENT); a.setAttribute("playsinline", ""); const p = a.play(); if (p && p.catch) p.catch(() => {}); } catch (e) {}
+    }
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC || (window.bluberAudio && !gesture)) return;
+    try { if (window.bluberAudio) window.bluberAudio.close(); } catch (e) {}
+    try { window.bluberAudio = new AC(); window.bluberAudio.resume().catch(() => {}); } catch (e) { window.bluberAudio = null; }
+  }
+  function mute() { try { if (window.bluberAudio) window.bluberAudio.close(); } catch (e) {} window.bluberAudio = null; }
   // Pantalla completa solo donde existe (en iPhone no hay) y con mouse
   fullBtn.hidden = !(document.fullscreenEnabled && matchMedia("(pointer: fine)").matches);
 
@@ -718,6 +735,7 @@
     if (frame) frame.remove();
     if (!current) back = document.activeElement;
     current = id;
+    audio(false);
     colors();
     document.getElementById("pl-name").textContent = g.name;
     const store = document.getElementById("pl-store");
@@ -750,6 +768,7 @@
   function hide() {
     if (!current) return;
     current = null;
+    mute();
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
     pl.classList.remove("open");
     root.classList.remove("playing");
@@ -772,6 +791,7 @@
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return; // abrir en otra pestaña sigue funcionando
     e.preventDefault();
     const id = a.dataset.play;
+    audio(true);
     if (playing() !== id) history.pushState({ play: id }, "", urlFor(id));
     show(id);
   }));
