@@ -793,7 +793,7 @@
     pl.querySelectorAll(".pl-icon").forEach((n) => n.replaceChildren(icon.cloneNode(true)));
     pl.classList.remove("ready");
     frame = document.createElement("iframe");
-    frame.title = g.name;
+    frame.setAttribute("aria-label", g.name); // sin "title": el navegador lo mostraba como globito encima del juego
     frame.allow = "autoplay; fullscreen; screen-wake-lock";
     const ready = () => pl.classList.add("ready");
     frame.addEventListener("load", ready, { once: true });
