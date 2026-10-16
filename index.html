@@ -858,7 +858,11 @@
     frame.addEventListener("load", ready, { once: true });
     setTimeout(ready, 8000);
     frame.src = g.url;
-    stage.appendChild(frame);
+    // El juego entra cuando el audio de la landing ya suena (en un iPhone real tarda un instante en arrancar),
+    // así su intro suena desde el principio; máximo 0.5 s de espera
+    const f = frame, a = window.bluberAudio;
+    const go = () => { if (frame === f && !f.isConnected) stage.appendChild(f); };
+    if (a && a.state !== "running") { a.resume().then(go, go); setTimeout(go, 500); } else go();
     pl.hidden = false;
     root.classList.add("playing");
     outside.forEach((n) => (n.inert = true));
