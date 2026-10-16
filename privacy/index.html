@@ -16,8 +16,9 @@
   .wrap { width: min(760px, 100%); margin-inline: auto; padding: 0 20px; }
   header { border-bottom: 1px solid var(--line); }
   header .wrap { display: flex; align-items: center; justify-content: space-between; padding-block: 16px; }
-  .home { font: 800 19px "Montserrat", sans-serif; letter-spacing: -0.02em; color: var(--navy); text-decoration: none; }
-  .home span { color: #82CAFD; font-weight: 700; font-size: 13px; letter-spacing: 0.08em; margin-left: 6px; }
+  /* Solo el oso oficial (brand/bluber-bear.svg, sin modificar); el texto del logo nunca se reescribe */
+  .home { display: inline-flex; line-height: 0; }
+  .home img { width: 58px; height: auto; }
   nav a { color: var(--ink-2); font-weight: 600; text-decoration: none; margin-left: 14px; font-size: 15px; }
   nav a:hover { color: var(--navy); }
   main { padding-block: 44px 72px; }
@@ -37,7 +38,7 @@
 </head>
 <body>
 <header><div class="wrap">
-  <a class="home" href="/">BluBer<span>GAMES</span></a>
+  <a class="home" href="/" aria-label="BluBer Games"><img src="../brand/bluber-bear.svg" alt="BluBer Games" width="58" height="43"></a>
   <nav><a href="/support/">Support</a><a href="#es">Español</a></nav>
 </div></header>
 

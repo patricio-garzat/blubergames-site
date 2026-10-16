@@ -45,10 +45,9 @@
   .top { position: sticky; top: 0; z-index: 20; background: rgba(255, 255, 255, 0.78); backdrop-filter: saturate(1.6) blur(16px); -webkit-backdrop-filter: saturate(1.6) blur(16px); border-bottom: 1px solid transparent; transition: border-color .3s, background .3s; padding-top: env(safe-area-inset-top, 0px); }
   .top.scrolled { border-bottom-color: var(--line); background: rgba(255, 255, 255, 0.9); }
   .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
-  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-  .brand .bear-mark { width: 46px; height: auto; }
-  .brand b { font: 800 19px var(--f-display); letter-spacing: -0.02em; }
-  .brand b span { color: var(--sea); font-weight: 700; letter-spacing: 0.1em; font-size: 12px; margin-left: 7px; text-transform: uppercase; }
+  /* Encabezado: solo el oso oficial (el logo completo no cabe a 120 px de ancho y su texto nunca se reescribe) */
+  .brand { display: inline-flex; align-items: center; text-decoration: none; }
+  .brand .bear-mark { display: block; width: 58px; height: auto; }
   .nav { display: flex; align-items: center; gap: 4px; }
   .nav a { text-decoration: none; font: 600 15px var(--f-body); padding: 8px 14px; border-radius: 999px; color: var(--ink-2); transition: background .2s, color .2s; }
   .nav a:hover { color: var(--navy); background: var(--frost); }
@@ -352,7 +351,7 @@
 
 <header class="top" id="top">
   <div class="wrap">
-    <a class="brand" href="#" aria-label="BluBer Games"><svg class="bear-mark" viewBox="{{BEAR_VB}}" aria-hidden="true">{{BEAR}}</svg><b>BluBer<span>Games</span></b></a>
+    <a class="brand" href="#" aria-label="BluBer Games"><svg class="bear-mark" viewBox="{{BEAR_VB}}" aria-hidden="true">{{BEAR}}</svg></a>
     <nav class="nav" aria-label="Main">
       <a href="#games" data-i="nav_games">Games</a>
       <a href="#studio" data-i="nav_studio">Studio</a>
