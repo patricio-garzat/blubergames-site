@@ -189,6 +189,138 @@
   .cover.cs { cursor: pointer; background: radial-gradient(circle at 50% 42%, rgba(111, 142, 247, 0.22), rgba(111, 142, 247, 0) 58%), url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2256%22%20height%3D%2297%22%20viewBox%3D%220%200%2056%2097%22%3E%3Cpath%20d%3D%22M28%200%2056%2016.2%2028%2032.3%200%2016.2Z%22%20fill%3D%22%23232D41%22%2F%3E%3Cpath%20d%3D%22M0%2016.2%2028%2032.3%2028%2064.7%200%2048.5Z%22%20fill%3D%22%231F2839%22%2F%3E%3Cpath%20d%3D%22M56%2016.2%2028%2032.3%2028%2064.7%2056%2048.5Z%22%20fill%3D%22%23262F44%22%2F%3E%3Cpath%20d%3D%22M0%2048.5%2028%2064.7%200%2080.8%20-28%2064.7Z%22%20fill%3D%22%23232D41%22%2F%3E%3Cpath%20d%3D%22M-28%2064.7%200%2080.8%200%20113.2%20-28%2097Z%22%20fill%3D%22%231F2839%22%2F%3E%3Cpath%20d%3D%22M28%2064.7%200%2080.8%200%20113.2%2028%2097Z%22%20fill%3D%22%23262F44%22%2F%3E%3Cpath%20d%3D%22M56%2048.5%2084%2064.7%2056%2080.8%2028%2064.7Z%22%20fill%3D%22%23232D41%22%2F%3E%3Cpath%20d%3D%22M28%2064.7%2056%2080.8%2056%20113.2%2028%2097Z%22%20fill%3D%22%231F2839%22%2F%3E%3Cpath%20d%3D%22M84%2064.7%2056%2080.8%2056%20113.2%2084%2097Z%22%20fill%3D%22%23262F44%22%2F%3E%3Cpath%20d%3D%22M0%20-48.5%2028%20-32.3%200%20-16.2%20-28%20-32.3Z%22%20fill%3D%22%23232D41%22%2F%3E%3Cpath%20d%3D%22M-28%20-32.3%200%20-16.2%200%2016.2%20-28%200Z%22%20fill%3D%22%231F2839%22%2F%3E%3Cpath%20d%3D%22M28%20-32.3%200%20-16.2%200%2016.2%2028%200Z%22%20fill%3D%22%23262F44%22%2F%3E%3Cpath%20d%3D%22M56%20-48.5%2084%20-32.3%2056%20-16.2%2028%20-32.3Z%22%20fill%3D%22%23232D41%22%2F%3E%3Cpath%20d%3D%22M28%20-32.3%2056%20-16.2%2056%2016.2%2028%200Z%22%20fill%3D%22%231F2839%22%2F%3E%3Cpath%20d%3D%22M84%20-32.3%2056%20-16.2%2056%2016.2%2084%200Z%22%20fill%3D%22%23262F44%22%2F%3E%3Cpath%20d%3D%22M28%2097%2056%20113.2%2028%20129.3%200%20113.2Z%22%20fill%3D%22%23232D41%22%2F%3E%3Cpath%20d%3D%22M0%20113.2%2028%20129.3%2028%20161.7%200%20145.5Z%22%20fill%3D%22%231F2839%22%2F%3E%3Cpath%20d%3D%22M56%20113.2%2028%20129.3%2028%20161.7%2056%20145.5Z%22%20fill%3D%22%23262F44%22%2F%3E%3C%2Fsvg%3E") 50% 0 / 56px 97px, var(--night); }
   .cover.cs::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(28, 37, 53, 0) 55%, rgba(28, 37, 53, 0.5)); }
   .cover-icon { position: relative; z-index: 1; transition: transform .5s var(--ease); }
+  /* El cubo de la portada gira como el logo del Inicio de la app: el grupo de tres del centro da un giro de
+     60° cada 2 s, con la curva y el "levantón" de un giro del juego (la misma animación de Cube Swipe) */
+  .cover .app-icon g[transform="rotate(180)"] { transform-origin: 0 0; transform: rotate(180deg); animation: cs-turn 12s linear 0.6s infinite; }
+  @keyframes cs-turn {
+    0.000% { transform: rotate(180.00deg) scale(1.0000); }
+    0.175% { transform: rotate(180.03deg) scale(1.0141); }
+    0.350% { transform: rotate(180.24deg) scale(1.0278); }
+    0.525% { transform: rotate(180.81deg) scale(1.0409); }
+    0.700% { transform: rotate(181.92deg) scale(1.0529); }
+    0.875% { transform: rotate(183.75deg) scale(1.0636); }
+    1.050% { transform: rotate(186.48deg) scale(1.0728); }
+    1.225% { transform: rotate(190.29deg) scale(1.0802); }
+    1.400% { transform: rotate(195.36deg) scale(1.0856); }
+    1.575% { transform: rotate(201.87deg) scale(1.0889); }
+    1.750% { transform: rotate(210.00deg) scale(1.0900); }
+    1.925% { transform: rotate(218.13deg) scale(1.0889); }
+    2.100% { transform: rotate(224.64deg) scale(1.0856); }
+    2.275% { transform: rotate(229.71deg) scale(1.0802); }
+    2.450% { transform: rotate(233.52deg) scale(1.0728); }
+    2.625% { transform: rotate(236.25deg) scale(1.0636); }
+    2.800% { transform: rotate(238.08deg) scale(1.0529); }
+    2.975% { transform: rotate(239.19deg) scale(1.0409); }
+    3.150% { transform: rotate(239.76deg) scale(1.0278); }
+    3.325% { transform: rotate(239.97deg) scale(1.0141); }
+    3.500% { transform: rotate(240.00deg) scale(1.0000); }
+    16.667% { transform: rotate(240.00deg) scale(1.0000); }
+    16.842% { transform: rotate(240.03deg) scale(1.0141); }
+    17.017% { transform: rotate(240.24deg) scale(1.0278); }
+    17.192% { transform: rotate(240.81deg) scale(1.0409); }
+    17.367% { transform: rotate(241.92deg) scale(1.0529); }
+    17.542% { transform: rotate(243.75deg) scale(1.0636); }
+    17.717% { transform: rotate(246.48deg) scale(1.0728); }
+    17.892% { transform: rotate(250.29deg) scale(1.0802); }
+    18.067% { transform: rotate(255.36deg) scale(1.0856); }
+    18.242% { transform: rotate(261.87deg) scale(1.0889); }
+    18.417% { transform: rotate(270.00deg) scale(1.0900); }
+    18.592% { transform: rotate(278.13deg) scale(1.0889); }
+    18.767% { transform: rotate(284.64deg) scale(1.0856); }
+    18.942% { transform: rotate(289.71deg) scale(1.0802); }
+    19.117% { transform: rotate(293.52deg) scale(1.0728); }
+    19.292% { transform: rotate(296.25deg) scale(1.0636); }
+    19.467% { transform: rotate(298.08deg) scale(1.0529); }
+    19.642% { transform: rotate(299.19deg) scale(1.0409); }
+    19.817% { transform: rotate(299.76deg) scale(1.0278); }
+    19.992% { transform: rotate(299.97deg) scale(1.0141); }
+    20.167% { transform: rotate(300.00deg) scale(1.0000); }
+    33.333% { transform: rotate(300.00deg) scale(1.0000); }
+    33.508% { transform: rotate(300.03deg) scale(1.0141); }
+    33.683% { transform: rotate(300.24deg) scale(1.0278); }
+    33.858% { transform: rotate(300.81deg) scale(1.0409); }
+    34.033% { transform: rotate(301.92deg) scale(1.0529); }
+    34.208% { transform: rotate(303.75deg) scale(1.0636); }
+    34.383% { transform: rotate(306.48deg) scale(1.0728); }
+    34.558% { transform: rotate(310.29deg) scale(1.0802); }
+    34.733% { transform: rotate(315.36deg) scale(1.0856); }
+    34.908% { transform: rotate(321.87deg) scale(1.0889); }
+    35.083% { transform: rotate(330.00deg) scale(1.0900); }
+    35.258% { transform: rotate(338.13deg) scale(1.0889); }
+    35.433% { transform: rotate(344.64deg) scale(1.0856); }
+    35.608% { transform: rotate(349.71deg) scale(1.0802); }
+    35.783% { transform: rotate(353.52deg) scale(1.0728); }
+    35.958% { transform: rotate(356.25deg) scale(1.0636); }
+    36.133% { transform: rotate(358.08deg) scale(1.0529); }
+    36.308% { transform: rotate(359.19deg) scale(1.0409); }
+    36.483% { transform: rotate(359.76deg) scale(1.0278); }
+    36.658% { transform: rotate(359.97deg) scale(1.0141); }
+    36.833% { transform: rotate(360.00deg) scale(1.0000); }
+    50.000% { transform: rotate(360.00deg) scale(1.0000); }
+    50.175% { transform: rotate(360.03deg) scale(1.0141); }
+    50.350% { transform: rotate(360.24deg) scale(1.0278); }
+    50.525% { transform: rotate(360.81deg) scale(1.0409); }
+    50.700% { transform: rotate(361.92deg) scale(1.0529); }
+    50.875% { transform: rotate(363.75deg) scale(1.0636); }
+    51.050% { transform: rotate(366.48deg) scale(1.0728); }
+    51.225% { transform: rotate(370.29deg) scale(1.0802); }
+    51.400% { transform: rotate(375.36deg) scale(1.0856); }
+    51.575% { transform: rotate(381.87deg) scale(1.0889); }
+    51.750% { transform: rotate(390.00deg) scale(1.0900); }
+    51.925% { transform: rotate(398.13deg) scale(1.0889); }
+    52.100% { transform: rotate(404.64deg) scale(1.0856); }
+    52.275% { transform: rotate(409.71deg) scale(1.0802); }
+    52.450% { transform: rotate(413.52deg) scale(1.0728); }
+    52.625% { transform: rotate(416.25deg) scale(1.0636); }
+    52.800% { transform: rotate(418.08deg) scale(1.0529); }
+    52.975% { transform: rotate(419.19deg) scale(1.0409); }
+    53.150% { transform: rotate(419.76deg) scale(1.0278); }
+    53.325% { transform: rotate(419.97deg) scale(1.0141); }
+    53.500% { transform: rotate(420.00deg) scale(1.0000); }
+    66.667% { transform: rotate(420.00deg) scale(1.0000); }
+    66.842% { transform: rotate(420.03deg) scale(1.0141); }
+    67.017% { transform: rotate(420.24deg) scale(1.0278); }
+    67.192% { transform: rotate(420.81deg) scale(1.0409); }
+    67.367% { transform: rotate(421.92deg) scale(1.0529); }
+    67.542% { transform: rotate(423.75deg) scale(1.0636); }
+    67.717% { transform: rotate(426.48deg) scale(1.0728); }
+    67.892% { transform: rotate(430.29deg) scale(1.0802); }
+    68.067% { transform: rotate(435.36deg) scale(1.0856); }
+    68.242% { transform: rotate(441.87deg) scale(1.0889); }
+    68.417% { transform: rotate(450.00deg) scale(1.0900); }
+    68.592% { transform: rotate(458.13deg) scale(1.0889); }
+    68.767% { transform: rotate(464.64deg) scale(1.0856); }
+    68.942% { transform: rotate(469.71deg) scale(1.0802); }
+    69.117% { transform: rotate(473.52deg) scale(1.0728); }
+    69.292% { transform: rotate(476.25deg) scale(1.0636); }
+    69.467% { transform: rotate(478.08deg) scale(1.0529); }
+    69.642% { transform: rotate(479.19deg) scale(1.0409); }
+    69.817% { transform: rotate(479.76deg) scale(1.0278); }
+    69.992% { transform: rotate(479.97deg) scale(1.0141); }
+    70.167% { transform: rotate(480.00deg) scale(1.0000); }
+    83.333% { transform: rotate(480.00deg) scale(1.0000); }
+    83.508% { transform: rotate(480.03deg) scale(1.0141); }
+    83.683% { transform: rotate(480.24deg) scale(1.0278); }
+    83.858% { transform: rotate(480.81deg) scale(1.0409); }
+    84.033% { transform: rotate(481.92deg) scale(1.0529); }
+    84.208% { transform: rotate(483.75deg) scale(1.0636); }
+    84.383% { transform: rotate(486.48deg) scale(1.0728); }
+    84.558% { transform: rotate(490.29deg) scale(1.0802); }
+    84.733% { transform: rotate(495.36deg) scale(1.0856); }
+    84.908% { transform: rotate(501.87deg) scale(1.0889); }
+    85.083% { transform: rotate(510.00deg) scale(1.0900); }
+    85.258% { transform: rotate(518.13deg) scale(1.0889); }
+    85.433% { transform: rotate(524.64deg) scale(1.0856); }
+    85.608% { transform: rotate(529.71deg) scale(1.0802); }
+    85.783% { transform: rotate(533.52deg) scale(1.0728); }
+    85.958% { transform: rotate(536.25deg) scale(1.0636); }
+    86.133% { transform: rotate(538.08deg) scale(1.0529); }
+    86.308% { transform: rotate(539.19deg) scale(1.0409); }
+    86.483% { transform: rotate(539.76deg) scale(1.0278); }
+    86.658% { transform: rotate(539.97deg) scale(1.0141); }
+    86.833% { transform: rotate(540.00deg) scale(1.0000); }
+    100.000% { transform: rotate(540.00deg) scale(1.0000); }
+  }
   .cover .app-icon-box { width: 116px; height: 116px; box-shadow: 0 16px 34px rgba(0, 0, 0, 0.45), 0 3px 8px rgba(0, 0, 0, 0.25); }
   .gcard:hover .cover-icon, .cover:focus-visible .cover-icon { transform: translateY(-4px) scale(1.05); }
   .gc-body { display: flex; flex-direction: column; gap: 8px; flex: 1; padding: 22px 24px 24px; }
@@ -207,11 +339,24 @@
   .gcard.soon h3 { color: var(--ink-2); }
   /* Portada de SMUSH!: su propia paleta (fondo crema y las cuatro bolitas de color), nada de rombos */
   .cover.smush { cursor: pointer; background: #F6F5F1; }
+  /* Las portadas de juego recortan sus esquinas de arriba (las manchas con blur se salían del redondeo) */
+  .cover.cs, .cover.smush { clip-path: inset(0 round calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0); }
   .cover.smush .blob { position: absolute; width: 46%; aspect-ratio: 1; border-radius: 50%; filter: blur(28px); opacity: .5; }
   .cover.smush .b1 { background: #6BCB9B; left: -10%; top: -18%; }
   .cover.smush .b2 { background: #FF9E55; right: -12%; top: -10%; opacity: .38; }
   .cover.smush .b3 { background: #A584E8; left: 18%; bottom: -30%; opacity: .36; }
   .cover.smush .b4 { background: #F1C84D; right: 4%; bottom: -26%; opacity: .45; }
+  /* Movimiento tranquilo: las manchas flotan despacio y cada marcianito se mece desde sus pies (antenas incluidas) */
+  .cover.smush .blob { animation: drift 18s ease-in-out infinite; }
+  .cover.smush .b2 { animation-duration: 22s; animation-delay: -6s; }
+  .cover.smush .b3 { animation-duration: 20s; animation-delay: -11s; }
+  .cover.smush .b4 { animation-duration: 24s; animation-delay: -3s; }
+  @keyframes drift { 33% { transform: translate(8%, 6%) scale(1.08); } 66% { transform: translate(-6%, -4%) scale(0.95); } }
+  .smush-logo image { transform-box: fill-box; transform-origin: 50% 96%; animation: sway 4.6s ease-in-out infinite; }
+  .smush-logo image:nth-of-type(2) { animation-duration: 3.9s; animation-delay: -1.4s; }
+  .smush-logo image:nth-of-type(3) { animation-duration: 5.2s; animation-delay: -2.6s; }
+  .smush-logo image:nth-of-type(4) { animation-duration: 4.2s; animation-delay: -0.7s; }
+  @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: translateY(-2.5%) rotate(3deg); } }
   .cover-logo { position: relative; z-index: 1; width: 72%; height: auto; filter: drop-shadow(0 10px 18px rgba(36, 37, 33, 0.12)); transition: transform .5s var(--ease); }
   .gcard:hover .cover-logo, .cover:focus-visible .cover-logo { transform: translateY(-4px) scale(1.04); }
   .gc-tag.beta { color: #5C4300; background: #FBE7A6; border: 1px solid #F1C84D; padding: 4px 10px; }
@@ -354,7 +499,7 @@
     html { scroll-behavior: auto; }
     .player, .pl-stage iframe, .about-panel, .about-inner, .chev { transition: none; transform: none; }
     .about.open .chev { transform: rotate(180deg); }
-    .iphone, .stage .tile, .scene *, .hero::before, .hero::after, .app-icon-box, .q, .pl-load .pl-icon { animation: none !important; }
+    .iphone, .stage .tile, .scene *, .hero::before, .hero::after, .app-icon-box, .q, .pl-load .pl-icon, .cover * { animation: none !important; }
     .scene .snow { display: none; }
     .btn.primary::after { display: none; }
     .js .rv { opacity: 1; transform: none; transition: none; }
@@ -454,7 +599,7 @@
         <article class="gcard rv" aria-labelledby="gc-smush">
           <a class="cover smush" href="https://patricio-garzat.github.io/smush/" data-play="smush" aria-label="Play the SMUSH! beta" data-ia="play_smush">
             <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span>
-            <img class="cover-logo" src="assets/smush/logo.svg" alt="" width="920" height="370">
+            {{SMUSH_LOGO}}
           </a>
           <div class="gc-body">
             <div class="gc-title"><h3 id="gc-smush">SMUSH!</h3><span class="gc-tag beta" data-i="beta">Beta</span></div>

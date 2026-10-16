@@ -39,6 +39,9 @@ for key, val in {
     "GP_SCRIPT": read("src", "parts", "gameplay.js").strip(),
     "ARROW": '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 14 14 6M8 6h6v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     "APPLE": read("src", "parts", "apple.svg").strip(),
+    # Logo de SMUSH! tal cual (assets/smush/logo.svg, copiado sin cambios de Smush/brand/); solo se le pone una
+    # clase al <svg> para animar a sus marcianitos con CSS en la portada
+    "SMUSH_LOGO": re.sub(r"^<svg ", '<svg class="cover-logo smush-logo" aria-hidden="true" focusable="false" ', read("assets", "smush", "logo.svg").strip(), count=1),
     "PLAY": '<svg class="i-play" viewBox="0 0 20 20" aria-hidden="true"><path d="M6.5 4.6v10.8a1 1 0 0 0 1.5.86l8.6-5.4a1 1 0 0 0 0-1.72L8 3.74a1 1 0 0 0-1.5.86z" fill="currentColor"/></svg>',
 }.items():
     html = html.replace("{{" + key + "}}", val)
