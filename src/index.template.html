@@ -341,26 +341,48 @@
   .gcard.soon .cover { background: linear-gradient(160deg, #FFFFFF, var(--frost) 55%, var(--mist)); }
   .q { width: 72px; height: 72px; border-radius: 20px; display: grid; place-items: center; background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow); font: 800 28px var(--f-display); color: var(--ice); animation: breathe 5s ease-in-out infinite; }
   .gcard.soon h3 { color: var(--ink-2); }
-  /* Portada de SMUSH!: su propia paleta (fondo crema y las cuatro bolitas de color), nada de rombos */
-  .cover.smush { cursor: pointer; background: #F6F5F1; }
+  /* Portada de SMUSH! (rehecha el 17 oct 2026, se sentía plana): el cielo azul de su ícono, rayos de luz que giran
+     muy despacio, aros, burbujas de luz, destellos y nubes; el logo en su versión clara (logo-dark.svg, sin cambios).
+     Su propia paleta: nada de rombos */
+  .cover.smush { cursor: pointer; background: radial-gradient(70% 62% at 50% 44%, rgba(84, 170, 255, .55) 0%, rgba(84, 170, 255, 0) 70%), radial-gradient(130% 120% at 50% 40%, rgba(8, 24, 90, 0) 55%, rgba(8, 24, 90, .45) 100%), linear-gradient(170deg, #4DB3FF 0%, #1F74E8 46%, #123FAE 100%); isolation: isolate; }
   /* Las portadas de juego recortan sus esquinas de arriba (las manchas con blur se salían del redondeo) */
   .cover.cs, .cover.smush { clip-path: inset(0 round calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0); }
-  .cover.smush .blob { position: absolute; width: 46%; aspect-ratio: 1; border-radius: 50%; filter: blur(28px); opacity: .5; }
-  .cover.smush .b1 { background: #6BCB9B; left: -10%; top: -18%; }
-  .cover.smush .b2 { background: #FF9E55; right: -12%; top: -10%; opacity: .38; }
-  .cover.smush .b3 { background: #A584E8; left: 18%; bottom: -30%; opacity: .36; }
-  .cover.smush .b4 { background: #F1C84D; right: 4%; bottom: -26%; opacity: .45; }
-  /* Movimiento tranquilo: las manchas flotan despacio y cada marcianito se mece desde sus pies (antenas incluidas) */
-  .cover.smush .blob { animation: drift 18s ease-in-out infinite; }
-  .cover.smush .b2 { animation-duration: 22s; animation-delay: -6s; }
-  .cover.smush .b3 { animation-duration: 20s; animation-delay: -11s; }
-  .cover.smush .b4 { animation-duration: 24s; animation-delay: -3s; }
+  .cover.smush > span, .cover.smush > .sm-spark { position: absolute; pointer-events: none; }
+  .sm-rays { width: 170%; aspect-ratio: 1; left: -35%; top: 50%; margin-top: -85%; border-radius: 50%; opacity: .5;
+    background: repeating-conic-gradient(from 0deg, rgba(255, 255, 255, .26) 0deg 7deg, rgba(255, 255, 255, 0) 7deg 22.5deg);
+    -webkit-mask: radial-gradient(closest-side, rgba(0, 0, 0, .35) 6%, #000 24%, rgba(0, 0, 0, .5) 42%, transparent 64%); mask: radial-gradient(closest-side, rgba(0, 0, 0, .35) 6%, #000 24%, rgba(0, 0, 0, .5) 42%, transparent 64%);
+    animation: sm-spin 90s linear infinite; }
+  .sm-ring { left: 50%; top: 46%; aspect-ratio: 1; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .28); transform: translate(-50%, -50%); }
+  .sm-ring.r1 { width: 62%; animation: sm-ring 7s ease-in-out infinite; }
+  .sm-ring.r2 { width: 86%; border-color: rgba(255, 255, 255, .14); animation: sm-ring 7s ease-in-out -3.5s infinite; }
+  .sm-bub { border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .85), rgba(255, 255, 255, .18) 45%, rgba(255, 255, 255, .04) 70%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .35); animation: sm-float 9s ease-in-out infinite; }
+  .sm-bub.u1 { width: 9%; aspect-ratio: 1; left: 7%; top: 18%; }
+  .sm-bub.u2 { width: 5%; aspect-ratio: 1; left: 18%; top: 60%; animation-duration: 11s; animation-delay: -4s; opacity: .8; }
+  .sm-bub.u3 { width: 10%; aspect-ratio: 1; right: 3%; top: 62%; animation-duration: 13s; animation-delay: -7s; }
+  .sm-bub.u4 { width: 4%; aspect-ratio: 1; right: 19%; top: 14%; animation-duration: 10s; animation-delay: -2s; opacity: .85; }
+  .sm-bub.u5 { width: 6.5%; aspect-ratio: 1; left: 31%; top: 9%; animation-duration: 12s; animation-delay: -9s; opacity: .7; }
+  /* Nubes abajo y la sombra del logo sobre ellas */
+  .sm-cloud { left: -6%; right: -6%; bottom: -16%; height: 38%;
+    background: radial-gradient(30% 62% at 10% 72%, #fff 55%, transparent 57%), radial-gradient(26% 70% at 30% 78%, #fff 55%, transparent 57%), radial-gradient(28% 66% at 52% 82%, #fff 55%, transparent 57%), radial-gradient(26% 72% at 74% 76%, #fff 55%, transparent 57%), radial-gradient(28% 64% at 94% 70%, #fff 55%, transparent 57%);
+    opacity: .3; filter: blur(.5px) drop-shadow(0 -2px 6px rgba(255, 255, 255, .5)); animation: sm-drift 26s ease-in-out infinite; }
+  .sm-ground { left: 24%; right: 24%; bottom: 13%; height: 9%; border-radius: 50%; background: radial-gradient(closest-side, rgba(4, 16, 70, .4), rgba(4, 16, 70, 0)); }
+  .sm-spark { fill: #fff; filter: drop-shadow(0 0 6px rgba(255, 255, 255, .9)); animation: sm-twinkle 3.2s ease-in-out infinite; }
+  .sm-spark.k1 { width: 7%; left: 82%; top: 12%; fill: #FFF1A8; filter: drop-shadow(0 0 8px rgba(255, 228, 120, .95)); }
+  .sm-spark.k2 { width: 4.5%; left: 12%; top: 40%; animation-delay: -1.1s; }
+  .sm-spark.k3 { width: 3.5%; left: 88%; top: 64%; animation-delay: -2.2s; animation-duration: 2.8s; }
+  .sm-spark.k4 { width: 3%; left: 26%; top: 13%; animation-delay: -0.5s; animation-duration: 3.8s; fill: #D9F2FF; }
+  @keyframes sm-spin { to { transform: rotate(360deg); } }
+  @keyframes sm-ring { 50% { transform: translate(-50%, -50%) scale(1.06); opacity: .55; } }
+  @keyframes sm-float { 50% { transform: translateY(-14%) translateX(6%); } }
+  @keyframes sm-drift { 50% { transform: translateX(3%); } }
+  @keyframes sm-twinkle { 0%, 100% { transform: scale(.55) rotate(0deg); opacity: .35; } 50% { transform: scale(1) rotate(20deg); opacity: 1; } }
   @keyframes drift { 33% { transform: translate(8%, 6%) scale(1.08); } 66% { transform: translate(-6%, -4%) scale(0.95); } }
   .smush-logo image { transform-box: fill-box; transform-origin: 50% 96%; animation: sway 4.6s ease-in-out infinite; }
   .smush-logo image:nth-of-type(2) { animation-duration: 3.9s; animation-delay: -1.4s; }
   .smush-logo image:nth-of-type(3) { animation-duration: 5.2s; animation-delay: -2.6s; }
   .smush-logo image:nth-of-type(4) { animation-duration: 4.2s; animation-delay: -0.7s; }
   @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: translateY(-2.5%) rotate(3deg); } }
+  .cover.smush .cover-logo { width: 74%; filter: drop-shadow(0 4px 0 #0E3A8C) drop-shadow(0 16px 22px rgba(4, 16, 70, .6)); }
   .cover-logo { position: relative; z-index: 1; width: 72%; height: auto; filter: drop-shadow(0 10px 18px rgba(36, 37, 33, 0.12)); transition: transform .5s var(--ease); }
   .gcard:hover .cover-logo, .cover:focus-visible .cover-logo { transform: translateY(-4px) scale(1.04); }
   .gc-tag.beta { color: #5C4300; background: #FBE7A6; border: 1px solid #F1C84D; padding: 4px 10px; }
@@ -600,7 +622,13 @@
         </article>
         <article class="gcard rv" aria-labelledby="gc-smush">
           <a class="cover smush" href="https://patricio-garzat.github.io/smush/" data-play="smush" aria-label="Play the SMUSH! beta" data-ia="play_smush">
-            <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span>
+            <span class="sm-rays"></span><span class="sm-ring r1"></span><span class="sm-ring r2"></span>
+            <span class="sm-bub u1"></span><span class="sm-bub u2"></span><span class="sm-bub u3"></span><span class="sm-bub u4"></span><span class="sm-bub u5"></span>
+            <span class="sm-cloud"></span><span class="sm-ground"></span>
+            <svg class="sm-spark k1" viewBox="-50 -50 100 100"><path d="M0-50C4-14 14-4 50 0 14 4 4 14 0 50-4 14-14 4-50 0-14-4-4-14 0-50Z"/></svg>
+            <svg class="sm-spark k2" viewBox="-50 -50 100 100"><path d="M0-50C4-14 14-4 50 0 14 4 4 14 0 50-4 14-14 4-50 0-14-4-4-14 0-50Z"/></svg>
+            <svg class="sm-spark k3" viewBox="-50 -50 100 100"><path d="M0-50C4-14 14-4 50 0 14 4 4 14 0 50-4 14-14 4-50 0-14-4-4-14 0-50Z"/></svg>
+            <svg class="sm-spark k4" viewBox="-50 -50 100 100"><path d="M0-50C4-14 14-4 50 0 14 4 4 14 0 50-4 14-14 4-50 0-14-4-4-14 0-50Z"/></svg>
             {{SMUSH_LOGO}}
           </a>
           <div class="gc-body">
