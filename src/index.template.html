@@ -385,6 +385,31 @@
   .cover.smush .cover-logo { width: 74%; filter: drop-shadow(0 4px 0 #0E3A8C) drop-shadow(0 16px 22px rgba(4, 16, 70, .6)); }
   .cover-logo { position: relative; z-index: 1; width: 72%; height: auto; filter: drop-shadow(0 10px 18px rgba(36, 37, 33, 0.12)); transition: transform .5s var(--ease); }
   .gcard:hover .cover-logo, .cover:focus-visible .cover-logo { transform: translateY(-4px) scale(1.04); }
+  /* Portada de Fireworks (18 oct 2026): su cielo de medianoche con estrellas que titilan, un resplandor dorado que
+     respira detrás del ícono (el sauce dorado) y el horizonte del lago. Su propia paleta (medianoche y oro), sin rombos */
+  .cover.fw { cursor: pointer; isolation: isolate; clip-path: inset(0 round calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0);
+    background: radial-gradient(1.2px 1.2px at 12% 18%, rgba(230, 236, 255, .8), transparent), radial-gradient(1px 1px at 27% 62%, rgba(230, 236, 255, .55), transparent),
+      radial-gradient(1.4px 1.4px at 41% 12%, rgba(230, 236, 255, .7), transparent), radial-gradient(1px 1px at 63% 26%, rgba(230, 236, 255, .5), transparent),
+      radial-gradient(1.3px 1.3px at 78% 14%, rgba(230, 236, 255, .75), transparent), radial-gradient(1px 1px at 90% 44%, rgba(230, 236, 255, .5), transparent),
+      radial-gradient(1px 1px at 7% 48%, rgba(230, 236, 255, .45), transparent), radial-gradient(1.2px 1.2px at 56% 8%, rgba(230, 236, 255, .6), transparent),
+      linear-gradient(180deg, #03050D 0%, #070C1E 58%, #0E1834 100%); }
+  .cover.fw > span:not(.cover-icon) { position: absolute; pointer-events: none; }
+  .fw-glow { left: 50%; top: 46%; width: 78%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(255, 200, 135, .34), rgba(200, 120, 70, .12) 55%, rgba(60, 40, 70, 0)); animation: fw-glow 7s ease-in-out infinite; }
+  .fw-lake { left: 0; right: 0; bottom: 0; height: 17%; background: linear-gradient(180deg, rgba(255, 214, 160, .16) 0, rgba(255, 214, 160, 0) 2px), linear-gradient(180deg, #050913, #03050C); }
+  .fw-lake::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 26px; background: radial-gradient(60% 100% at 18% 100%, #03050C 60%, transparent 62%), radial-gradient(55% 80% at 78% 100%, #03050C 60%, transparent 62%); }
+  .fw-star { width: 3px; height: 3px; border-radius: 50%; background: #FFF4DE; box-shadow: 0 0 6px rgba(255, 227, 179, .9); animation: fw-twinkle 4.2s ease-in-out infinite; }
+  .fw-star.t1 { left: 16%; top: 24%; }
+  .fw-star.t2 { left: 84%; top: 20%; animation-delay: -1.6s; animation-duration: 5s; }
+  .fw-star.t3 { left: 72%; top: 58%; animation-delay: -2.9s; animation-duration: 3.6s; width: 2px; height: 2px; }
+  .fw-star.t4 { left: 24%; top: 66%; animation-delay: -0.8s; animation-duration: 4.8s; width: 2px; height: 2px; }
+  .cover.fw .cover-icon img { display: block; width: 116px; height: 116px; border-radius: 22.5%; box-shadow: 0 0 0 1px rgba(255, 227, 179, .12), 0 16px 34px rgba(0, 0, 0, .55), 0 0 44px rgba(241, 194, 122, .22); }
+  @keyframes fw-glow { 50% { transform: translate(-50%, -50%) scale(1.07); opacity: .8; } }
+  @keyframes fw-twinkle { 0%, 100% { opacity: .25; transform: scale(.7); } 50% { opacity: 1; transform: scale(1); } }
+  #more-fw .steps .n { background: #0E1834; color: #FFE3B3; box-shadow: inset 0 0 0 1px rgba(241, 194, 122, .5); }
+  /* "More games": con tres juegos en la fila, va abajo como una franja a lo ancho */
+  .gcard.soon { grid-column: 1 / -1; display: flex; grid-row: auto; flex-direction: row; align-items: stretch; }
+  .gcard.soon .cover { flex: none; width: 24%; aspect-ratio: auto; min-height: 132px; }
+  .gcard.soon .gc-body { justify-content: center; }
   .gc-tag.beta { color: #5C4300; background: #FBE7A6; border: 1px solid #F1C84D; padding: 4px 10px; }
   .gc-body .gc-note { font-size: 13.5px; line-height: 1.45; color: var(--ink-3); padding: 9px 12px; border-radius: 12px; background: #FFFBEE; border: 1px solid #F6E6B4; }
 
@@ -471,8 +496,11 @@
     .stage { min-height: 500px; }
     .scene { max-width: 400px; }
     .arcade { grid-template-columns: 1fr 1fr; }
-    .gcard.soon { grid-column: 1 / -1; display: flex; grid-row: auto; flex-direction: row; align-items: stretch; }
-    .gcard.soon .cover { flex: none; width: 34%; aspect-ratio: auto; min-height: 120px; }
+    /* Dos columnas: "More games" ocupa el lugar libre junto a Fireworks, como una tarjeta más */
+    .gcard.soon { grid-column: auto; flex-direction: column; }
+    .gcard.soon .cover { width: auto; aspect-ratio: 16 / 10; min-height: 0; }
+    .gcard.soon .gc-body { justify-content: flex-start; }
+    @supports (grid-template-rows: subgrid) { .gcard.soon { display: grid; grid-row: span 3; } }
   }
   @media (max-width: 620px) {
     .wrap { padding-inline: 18px; }
@@ -491,8 +519,8 @@
     .gc-body { padding: 18px 20px 20px; }
     .gc-more { margin-inline: 20px; }
     .gc-actions .btn { flex: 1; padding-inline: 14px; }
-    .gcard.soon { border-radius: 24px; }
-    .gcard.soon .cover { width: 30%; min-height: 0; }
+    .gcard.soon { border-radius: 24px; grid-column: 1 / -1; display: flex; grid-row: auto; flex-direction: row; align-items: stretch; }
+    .gcard.soon .cover { width: 30%; aspect-ratio: auto; min-height: 0; }
     .gcard.soon .gc-body { padding: 14px 16px 16px; gap: 6px; }
     .gcard.soon .gc-title { flex-wrap: wrap; justify-content: flex-start; gap: 4px 8px; }
     .gcard.soon h3 { font-size: 18px; }
@@ -653,6 +681,35 @@
             </div>
           </div>
         </article>
+        <article class="gcard rv" aria-labelledby="gc-fw">
+          <a class="cover fw" href="https://patricio-garzat.github.io/fireworks/" data-play="fireworks" aria-label="Play the Fireworks beta" data-ia="play_fw">
+            <span class="fw-glow"></span>
+            <span class="fw-star t1"></span><span class="fw-star t2"></span><span class="fw-star t3"></span><span class="fw-star t4"></span>
+            <span class="fw-lake"></span>
+            <span class="cover-icon"><img src="assets/fireworks/icon.jpg" alt="" width="116" height="116"></span>
+          </a>
+          <div class="gc-body">
+            <div class="gc-title"><h3 id="gc-fw">Fireworks</h3><span class="gc-tag beta" data-i="beta">Beta</span></div>
+            <p data-i="gc_fw">Tap the night sky and paint it with light: 27 kinds of fireworks, calm sounds and a grand finale.</p>
+            <p class="gc-meta" data-i="gc_fw_meta">Relaxing · Free · Web</p>
+            <p class="gc-note" data-i="gc_beta_note">Early version: things may still change, and your progress could reset.</p>
+            <div class="gc-actions">
+              <a class="btn primary sm" href="https://patricio-garzat.github.io/fireworks/" data-play="fireworks">{{PLAY}}<span data-i="play_beta">Play the beta</span></a>
+            </div>
+          </div>
+          <div class="gc-more">
+            <button class="more-btn" type="button" aria-expanded="false" aria-controls="more-fw"><span data-i="howto">How to play</span><span class="more-chev"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 7.75 10 12.25l4.5-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+            <div class="more-panel" id="more-fw" role="region" aria-labelledby="gc-fw">
+              <div class="more-inner" inert>
+                <ol class="steps">
+                <li style="--i:0"><span class="n">1</span><span data-i="st_fw1">Tap anywhere in the sky to launch a firework.</span></li>
+                <li style="--i:1"><span class="n">2</span><span data-i="st_fw2">Hold to charge a bigger one, or swipe for a chain.</span></li>
+                <li style="--i:2"><span class="n">3</span><span data-i="st_fw3">Keep the show going to fill the bar for a Grand Finale.</span></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </article>
         <article class="gcard soon rv" aria-labelledby="gc-3">
           <div class="cover" aria-hidden="true"><span class="q">+</span></div>
           <div class="gc-body">
@@ -762,6 +819,12 @@
     gc_smush: "Aplasta a los marcianos antes de que se escapen, desbloquea herramientas poderosas y viaja a nuevas islas.",
     gc_smush_meta: "Clicker · Gratis · Web",
     gc_beta_note: "Versión temprana: todavía puede cambiar y tu progreso podría reiniciarse.",
+    play_fw: "Jugar la beta de Fireworks",
+    gc_fw: "Toca el cielo de noche y píntalo de luz: 27 tipos de fuegos artificiales, sonidos tranquilos y una gran final.",
+    gc_fw_meta: "Relajante · Gratis · Web",
+    st_fw1: "Toca donde quieras en el cielo para lanzar un fuego artificial.",
+    st_fw2: "Mantén presionado para cargar uno más grande, o desliza para una cadena.",
+    st_fw3: "Sigue el show para llenar la barra y desatar la Gran Final.",
     s3_t: "Más juegos", s3_tag: "Después", s3_d: "Un rompecabezas tranquilo a la vez. Todos se podrán jugar aquí mismo.",
     credit: "Inspirado en el Propp Lozenge, el puzzle magnético inventado por James Propp y diseñado por Oskar van Deventer.",
     studio_eyebrow: "Nuestro estudio", studio_title: "Un estudio pequeño con un oso polar",
@@ -843,6 +906,8 @@ document.querySelectorAll(".gc-more").forEach((box) => {
     "cube-swipe": { name: "Cube Swipe", url: "/play/cube-swipe/", store: "https://apps.apple.com/app/id6822390183", light: "#EEF5FB", dark: "#1C2535" },
     // Beta: todavía sin App Store ni subdominio (cuando exista smush.blubergames.com, cambiar el proxy en _redirects)
     "smush": { name: "SMUSH!", url: "/play/smush/", icon: "assets/smush/icon.png", beta: true, light: "#F6F5F1", dark: "#191918" },
+    // night: el juego siempre es de noche, así que el reproductor va oscuro aunque el sistema esté en claro
+    "fireworks": { name: "Fireworks", url: "/play/fireworks/", icon: "assets/fireworks/icon.jpg", beta: true, night: true, light: "#04060F", dark: "#04060F" },
   };
   const root = document.documentElement, body = document.body;
   const pl = document.getElementById("player"), stage = document.getElementById("pl-stage");
@@ -881,9 +946,9 @@ document.querySelectorAll(".gc-more").forEach((box) => {
   }
   function colors() {
     const g = GAMES[current];
-    const bg = dark.matches ? g.dark : g.light;
+    const night = dark.matches || g.night, bg = night ? g.dark : g.light;
     pl.style.setProperty("--pbg", bg);
-    pl.classList.toggle("light", !dark.matches);
+    pl.classList.toggle("light", !night);
     paint(bg);
   }
   function show(id) {
