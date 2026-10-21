@@ -452,7 +452,7 @@
   .pick:hover img, .pick:focus-visible img { transform: translateY(-10px) scale(1.05); box-shadow: 0 26px 46px rgba(var(--shadow-rgb), .2), 0 0 70px rgba(var(--glow), .5); }
   .pick .tag { font-size: 10px; padding: 6px 9px; }
   footer { position: relative; overflow: hidden; background: var(--bg-deep); border-top: 1px solid var(--border); padding: 48px 0 calc(40px + env(safe-area-inset-bottom, 0px)); }
-  footer .row { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  footer .row { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
   .logo-card { display: inline-flex; padding: 4px 0; cursor: default; border-radius: 18px; transition: background .3s, padding .3s; }
   /* En oscuro (decisión del usuario, 21 oct 2026): el oso oficial tal cual, sin tarjeta ni contorno. En el logo completo,
      solo las letras "BluBer" (navy) pasan a blanco (brand/bluber-logo-dark.svg); el ojo y la nariz del oso siguen navy */
@@ -461,8 +461,8 @@
   html[data-theme="dark"] .logo-card .dark { display: block; }
   .logo-card img { width: 128px; height: auto; transition: transform .6s var(--ease-out); }
   .logo-card:hover img { transform: translateY(-3px); }
-  footer nav { display: flex; gap: 26px; flex-wrap: wrap; font: 600 15px var(--f-body); }
-  footer .legal { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 13.5px; color: var(--text-tertiary); }
+  footer nav { display: flex; justify-content: center; gap: 12px 26px; flex-wrap: wrap; font: 600 15px var(--f-body); }
+  footer .legal { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border); display: flex; justify-content: center; column-gap: 18px; text-align: center; gap: 10px; flex-wrap: wrap; font-size: 13.5px; color: var(--text-tertiary); }
   .flake { position: absolute; top: -10px; width: var(--s, 6px); height: var(--s, 6px); border-radius: 50%; background: var(--ice); box-shadow: 0 0 8px rgba(var(--accent-rgb), .5); pointer-events: none; animation: fall var(--t, 3s) linear forwards; }
   @keyframes fall { to { transform: translate(var(--dx, 0px), 240px); opacity: 0; } }
 
@@ -537,6 +537,8 @@
     .g-acts .btn { flex: 1 1 auto; }
     .scene { max-width: 340px; border-radius: 30px; }
     .stats .stat + .stat { padding-left: 14px; }
+    .glass { flex-direction: column; justify-content: center; text-align: center; gap: 10px; padding: 18px; }
+    .glass:hover { transform: translateY(-3px); }
     .pick img { width: 72px; height: 72px; }
     .picks { gap: 16px; }
     .toast { width: calc(100% - 32px); max-width: 420px; }
@@ -986,8 +988,8 @@
     // Al bajar, solo la aurora se mueve un poco (profundidad); los juegos se quedan donde están
     gsap.to(".aurora", { yPercent: 16, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.8 } });
     textAnims();
-    gsap.from(".glass", { x: -24, opacity: 0, duration: 1, ease: "expo.out", stagger: 0.1, scrollTrigger: { trigger: ".values", start: "top 88%" } });
-    gsap.from(".pick", { y: 40, opacity: 0, duration: 1.2, ease: "expo.out", stagger: 0.1, scrollTrigger: { trigger: ".picks", start: "top 92%" } });
+    gsap.fromTo(".glass", { opacity: 0, translate: "0 18px" }, { opacity: 1, translate: "0 0", duration: 1, ease: "expo.out", stagger: 0.1, clearProps: "opacity,translate", scrollTrigger: { trigger: ".values", start: "top 88%" } });
+    gsap.fromTo(".pick", { opacity: 0, translate: "0 30px" }, { opacity: 1, translate: "0 0", duration: 1.2, ease: "expo.out", stagger: 0.1, clearProps: "opacity,translate", scrollTrigger: { trigger: ".picks", start: "top 92%" } });
     const mq = [...document.querySelectorAll(".mq")]; let boost = 0;
     ScrollTrigger.create({ trigger: ".manifesto", start: "top bottom", end: "bottom top", onUpdate: (st) => { boost = Math.min(5, Math.abs(st.getVelocity()) / 500); } });
     gsap.ticker.add(() => { boost *= 0.93; mq.forEach((m) => m.getAnimations().forEach((a) => (a.playbackRate = 1 + boost))); });
