@@ -1,12 +1,12 @@
-"""Genera index.html a partir de src/index.template.html.
+"""Genera index.html a partir de src/index.template.html (diseño "Hielo claro", 21 oct 2026).
 
-Inserta los logos oficiales (brand/bluber-bear.svg y brand/bluber-logo.svg, sin modificarlos),
-el favicon (el oso) y las piezas del gameplay guardadas en src/parts/.
+Inserta, sin modificarlos: el ícono SVG de Cube Swipe (src/parts/app-icon.svg) y su animación de giro (src/parts/cs-turn.css),
+y el logo claro de SMUSH! (assets/smush/logo-dark.svg; solo se le agrega una clase para mecer a sus marcianitos con CSS).
+El oso y el logo de BluBer se cargan desde brand/ (bluber-bear.svg, bluber-logo.svg y bluber-logo-dark.svg para fondo oscuro).
 Uso: python3 src/build.py
 """
 import os
 import re
-import urllib.parse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -15,34 +15,12 @@ def read(*p):
     return open(os.path.join(ROOT, *p), encoding="utf-8").read()
 
 
-def svg_inner(name):
-    s = read("brand", name)
-    vb = re.search(r'viewBox="([^"]+)"', s).group(1)
-    body = re.sub(r"^<svg[^>]*>", "", s.strip())
-    body = body[: body.rindex("</svg>")]
-    body = re.sub(r"<title>.*?</title>", "", body)
-    return vb, re.sub(r">\s+<", "><", body).strip()
-
-
-bear_vb, bear = svg_inner("bluber-bear.svg")
-logo_vb, logo = svg_inner("bluber-logo.svg")
-favicon = "data:image/svg+xml," + urllib.parse.quote(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{bear_vb}">{bear}</svg>', safe="")
-
-head = read("src", "parts", "head.html").replace("{{FAVICON}}", favicon)
 html = read("src", "index.template.html")
+smush = re.sub(r"^<svg ", '<svg class="sm-logo" aria-hidden="true" focusable="false" ', read("assets", "smush", "logo-dark.svg").strip(), count=1)
 for key, val in {
-    "HEAD_TOP": head,
-    "BEAR_VB": bear_vb, "BEAR": bear,
-    "LOGO_VB": logo_vb, "LOGO": logo,
-    "APP_ICON": read("src", "parts", "app-icon.svg").strip(),
-    "GP_SVG": read("src", "parts", "gameplay.svg").strip(),
-    "GP_SCRIPT": read("src", "parts", "gameplay.js").strip(),
-    "ARROW": '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 14 14 6M8 6h6v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    "APPLE": read("src", "parts", "apple.svg").strip(),
-    # Logo de SMUSH! tal cual, en su versión clara para el cielo azul (assets/smush/logo-dark.svg, copiado sin cambios de Smush/brand/); solo se le pone una
-    # clase al <svg> para animar a sus marcianitos con CSS en la portada
-    "SMUSH_LOGO": re.sub(r"^<svg ", '<svg class="cover-logo smush-logo" aria-hidden="true" focusable="false" ', read("assets", "smush", "logo-dark.svg").strip(), count=1),
-    "PLAY": '<svg class="i-play" viewBox="0 0 20 20" aria-hidden="true"><path d="M6.5 4.6v10.8a1 1 0 0 0 1.5.86l8.6-5.4a1 1 0 0 0 0-1.72L8 3.74a1 1 0 0 0-1.5.86z" fill="currentColor"/></svg>',
+    "CS_TURN": read("src", "parts", "cs-turn.css"),
+    "CS_ICON": read("src", "parts", "app-icon.svg").strip().replace('class="app-icon"', 'class="cs-svg"', 1),
+    "SMUSH_LOGO": smush,
 }.items():
     html = html.replace("{{" + key + "}}", val)
 assert "{{" not in html, re.findall(r"\{\{\w+\}\}", html)
