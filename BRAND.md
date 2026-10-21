@@ -20,6 +20,7 @@ Si estás empezando un juego nuevo en otro chat, pídele que lea este archivo pr
 |---|---|
 | `brand/bluber-logo.svg` | Logo oficial: oso más "BluBer GAMES", **sobre fondo blanco**. |
 | `brand/bluber-bear.svg` | Solo el oso. Para la foto de perfil, íconos pequeños, el favicon y encabezados. |
+| `brand/bluber-logo-dark.svg` | Logo completo para **fondo oscuro**: igual al oficial, con solo las letras "BluBer" en blanco. |
 | `brand/source/BluBer Games.ai` | Archivo original de Illustrator del logo oficial (13 oct 2026). |
 
 Los dos SVG salen directo del archivo de Illustrator, con las mismas formas y colores. Comparados píxel por píxel, solo difieren en el suavizado de las orillas. **Nunca se redibuja ni se recorta el logo**: si hace falta otro tamaño u otro encuadre, se cambia solo el margen alrededor.
@@ -34,7 +35,11 @@ Colores del logo (los del archivo oficial):
 
 Reglas:
 
-- **Fondo:** el logo vive sobre blanco. Todavía no hay versión oficial para fondo oscuro. Sobre fondos oscuros, ponlo dentro de una tarjeta blanca; no le cambies los colores.
+- **Fondo claro:** el logo vive sobre blanco (`brand/bluber-logo.svg`).
+- **Fondo oscuro (21 oct 2026):**
+  - El oso (`brand/bluber-bear.svg`) va tal cual: sin tarjeta blanca y sin contorno; su azul se lee bien sobre lo oscuro.
+  - El logo completo usa `brand/bluber-logo-dark.svg`: el mismo logo, con solo las letras "BluBer" (navy `#093A5B`) en blanco. El ojo y la nariz del oso siguen navy y "GAMES" sigue en `#57ADE1`.
+  - Nunca contorno en las letras ni tarjeta blanca alrededor.
 - **Forma:** no lo deformes, no lo rotes, no le cambies los colores y no lo redibujes.
 - **Espacio libre:** deja alrededor al menos el alto de la "B" de "BluBer".
 - **Tamaño mínimo del logo completo:** 120 px de ancho. Por debajo de eso, usa solo el oso.
