@@ -488,10 +488,10 @@
             <span class="tile-cap"><b>SMUSH!</b><span class="tag tag-beta" data-i="t_beta">Beta</span></span>
           </span><i class="bar"></i>
         </a>
-        <a class="tile g-fw" data-g="2" href="https://patricio-garzat.github.io/fireworks/" data-play="fireworks" aria-label="Play the Fireworks beta" data-ia="play_fw">
+        <a class="tile g-fw" data-g="2" href="https://patricio-garzat.github.io/fireworks/" data-play="fireworks" aria-label="Play Fireworks" data-ia="play_fw">
           <span class="tile-in">
             <span class="art sc-fw"><canvas id="fw-canvas" aria-hidden="true"></canvas><span class="lake"></span></span>
-            <span class="tile-cap"><b>Fireworks</b><span class="tag tag-beta" data-i="t_beta">Beta</span></span>
+            <span class="tile-cap"><b>Fireworks</b><span class="tag tag-live" data-i="t_live">Out now</span></span>
           </span><i class="bar"></i>
         </a>
         <a class="tile g-rl" data-g="3" href="https://patricio-garzat.github.io/raceline/" data-play="raceline" aria-label="Play the RaceLine beta" data-ia="play_rl">
@@ -535,9 +535,10 @@
           <div class="g-text">
             <div class="g-head"><span class="num"><b>03</b> / 04</span><h2>Fireworks</h2></div>
             <p data-i="d_fw">Tap the night sky and paint it with light: 27 kinds of fireworks, calm sounds and a grand finale over the lake.</p>
-            <div class="meta"><span data-i="m_fw1">Relaxing</span><span data-i="m_fw2">27 fireworks</span><span>Web</span></div>
+            <div class="meta"><span data-i="m_fw1">Relaxing</span><span data-i="m_fw2">27 fireworks</span><span>iPhone · Web</span></div>
           </div>
-          <div class="g-acts"><a class="btn btn-primary" href="https://patricio-garzat.github.io/fireworks/" data-play="fireworks"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6.5 4.6v10.8a1 1 0 0 0 1.5.86l8.6-5.4a1 1 0 0 0 0-1.72L8 3.74a1 1 0 0 0-1.5.86z" fill="currentColor"/></svg><span data-i="play_beta">Play the beta</span></a></div>
+          <div class="g-acts"><a class="btn btn-primary" href="https://patricio-garzat.github.io/fireworks/" data-play="fireworks"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6.5 4.6v10.8a1 1 0 0 0 1.5.86l8.6-5.4a1 1 0 0 0 0-1.72L8 3.74a1 1 0 0 0-1.5.86z" fill="currentColor"/></svg><span data-i="play">Play</span></a>
+            <a class="store" href="https://apps.apple.com/app/id6824312124" target="_blank" rel="noopener" aria-label="Download Fireworks on the App Store"><img class="b-en" src="assets/badges/app-store-en-us.svg" alt="Download on the App Store" width="156" height="52"><img class="b-es" src="assets/badges/app-store-es-mx.svg" alt="Descárgalo en el App Store" width="156" height="52"></a></div>
         </article>
         <article class="g-info" data-g="3">
           <div class="g-text">
@@ -609,7 +610,7 @@
       <div class="picks">
         <a class="pick g-cs" href="https://cubeswipe.blubergames.com/" data-play="cube-swipe"><img src="assets/home/cubeswipe-icon.png" alt="" width="112" height="112">Cube Swipe<span class="tag tag-live" data-i="t_live">Out now</span></a>
         <a class="pick g-sm" href="https://patricio-garzat.github.io/smush/" data-play="smush"><img src="assets/home/smush-icon.png" alt="" width="112" height="112">SMUSH!<span class="tag tag-beta" data-i="t_beta">Beta</span></a>
-        <a class="pick g-fw" href="https://patricio-garzat.github.io/fireworks/" data-play="fireworks"><img src="assets/home/fireworks-icon.png" alt="" width="112" height="112">Fireworks<span class="tag tag-beta" data-i="t_beta">Beta</span></a>
+        <a class="pick g-fw" href="https://patricio-garzat.github.io/fireworks/" data-play="fireworks"><img src="assets/home/fireworks-icon.png" alt="" width="112" height="112">Fireworks<span class="tag tag-live" data-i="t_live">Out now</span></a>
         <a class="pick g-rl" href="https://patricio-garzat.github.io/raceline/" data-play="raceline"><img src="assets/home/raceline-icon.png" alt="" width="112" height="112">RaceLine<span class="tag tag-beta" data-i="t_beta">Beta</span></a>
       </div>
     </div>
@@ -664,7 +665,7 @@
     eyebrow: "Estudio independiente de juegos para iOS",
     h1: 'Juegos tranquilos, listos para <span class="grad">jugar</span>.',
     lead: "Cuatro juegos tranquilos para jugar aquí mismo, gratis y sin descargar nada. También en iPhone, con el App Store.",
-    play_cs: "Jugar Cube Swipe", play_sm: "Jugar la beta de SMUSH!", play_fw: "Jugar la beta de Fireworks", play_rl: "Jugar la beta de RaceLine",
+    play_cs: "Jugar Cube Swipe", play_sm: "Jugar la beta de SMUSH!", play_fw: "Jugar Fireworks", play_rl: "Jugar la beta de RaceLine",
     d_cs: "Rombos planos de tres colores forman la ilusión de un cubo. Desliza alrededor de un punto para girar tres rombos y vuelve a armarlo: amarillo arriba, rojo a la izquierda y azul a la derecha.",
     m_cs1: "Rompecabezas", m_cs2: "50 niveles", play: "Jugar", play_beta: "Jugar la beta",
     d_sm: "Aplasta a los marcianos antes de que se escapen, desbloquea herramientas poderosas y viaja a nuevas islas. Un clicker tranquilo con mucho por descubrir.",
@@ -1025,7 +1026,7 @@
     // Beta: todavía sin App Store ni subdominio (cuando exista smush.blubergames.com, cambiar el proxy en _redirects)
     "smush": { name: "SMUSH!", url: "/play/smush/", icon: "assets/smush/icon.png", beta: true, light: "#F6F5F1", dark: "#191918" },
     // night: el juego siempre es de noche, así que el reproductor va oscuro aunque el sistema esté en claro
-    "fireworks": { name: "Fireworks", url: "/play/fireworks/", icon: "assets/fireworks/icon.jpg", beta: true, night: true, light: "#04060F", dark: "#04060F" },
+    "fireworks": { name: "Fireworks", url: "/play/fireworks/", icon: "assets/fireworks/icon.jpg", store: "https://apps.apple.com/app/id6824312124", night: true, light: "#04060F", dark: "#04060F" },
     "raceline": { name: "RaceLine", url: "/play/raceline/", icon: "assets/raceline/icon.png", beta: true, light: "#F2F2F0", dark: "#0E0E0F" },
   };
   const root = document.documentElement, body = document.body;
